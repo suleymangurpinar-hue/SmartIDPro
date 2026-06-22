@@ -1,0 +1,14 @@
+Analyzing smart_id_pro...                                       
+
+  error • Target of URI doesn't exist: '../provider/document_preset_provider.dart' • lib/features/enterprise/widgets/document_preset_bar.dart:4:8 • uri_does_not_exist
+  error • The name 'DocumentPresetProvider' isn't a type, so it can't be used as a type argument • lib/features/enterprise/widgets/document_preset_bar.dart:16:9 • non_type_as_type_argument
+  error • The property 'selected' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/document_preset_bar.dart:30:30 • unchecked_use_of_nullable_value
+  error • The method 'changePreset' can't be unconditionally invoked because the receiver can be 'null' • lib/features/enterprise/widgets/document_preset_bar.dart:36:26 • unchecked_use_of_nullable_value
+   info • Unnecessary use of multiple underscores • lib/features/enterprise/widgets/face_mesh_hud.dart:39:20 • unnecessary_underscores
+   info • Unnecessary use of multiple underscores • lib/features/enterprise/widgets/icao_live_panel.dart:42:20 • unnecessary_underscores
+  error • Target of URI doesn't exist: '../provider/job_history_provider.dart' • lib/features/enterprise/widgets/recent_jobs_panel.dart:4:8 • uri_does_not_exist
+  error • The name 'JobHistoryProvider' isn't a type, so it can't be used as a type argument • lib/features/enterprise/widgets/recent_jobs_panel.dart:15:9 • non_type_as_type_argument
+  error • The property 'jobs' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/recent_jobs_panel.dart:61:34 • unchecked_use_of_nullable_value
+  error • The property 'jobs' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/recent_jobs_panel.dart:70:32 • unchecked_use_of_nullable_value
+   info • Unnecessary use of multiple underscores • lib/features/workspace/widgets/scan_overlay.dart:30:20 • unnecessary_underscores
+

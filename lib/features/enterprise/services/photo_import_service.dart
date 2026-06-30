@@ -2,8 +2,7 @@ import 'package:file_picker/file_picker.dart';
 
 class PhotoImportService {
   static Future<String?> pickPhoto() async {
-    final result =
-        await FilePicker.platform.pickFiles(
+    final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: [
         'jpg',
@@ -14,6 +13,8 @@ class PhotoImportService {
         'arw',
         'raf',
         'cr3',
+        'tif',
+        'tiff',
       ],
     );
 

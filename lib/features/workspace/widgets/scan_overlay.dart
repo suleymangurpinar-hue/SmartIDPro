@@ -4,12 +4,10 @@ class ScanOverlay extends StatefulWidget {
   const ScanOverlay({super.key});
 
   @override
-  State<ScanOverlay> createState() =>
-      _ScanOverlayState();
+  State<ScanOverlay> createState() => _ScanOverlayState();
 }
 
-class _ScanOverlayState
-    extends State<ScanOverlay>
+class _ScanOverlayState extends State<ScanOverlay>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
@@ -27,12 +25,9 @@ class _ScanOverlayState
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: controller,
-      builder: (_, __) {
+      builder: (context, child) {
         return Align(
-          alignment: Alignment(
-            0,
-            controller.value * 2 - 1,
-          ),
+          alignment: Alignment(0, controller.value * 2 - 1),
           child: Container(
             height: 3,
             decoration: BoxDecoration(
@@ -44,10 +39,7 @@ class _ScanOverlayState
                 ],
               ),
               boxShadow: const [
-                BoxShadow(
-                  color: Color(0x88D4AF37),
-                  blurRadius: 20,
-                )
+                BoxShadow(color: Color(0x88D4AF37), blurRadius: 20),
               ],
             ),
           ),

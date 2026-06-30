@@ -14,28 +14,17 @@ class OnnxLoader {
 
     OrtEnv.instance.init();
 
-    final modelBytes = await rootBundle.load(
-      'assets/models/det_500m.onnx',
-    );
+    final modelBytes = await rootBundle.load('assets/models/det_500m.onnx');
 
-    final appDir =
-        await getApplicationSupportDirectory();
+    final appDir = await getApplicationSupportDirectory();
 
-    final modelFile = File(
-      '${appDir.path}/det_500m.onnx',
-    );
+    final modelFile = File('${appDir.path}/det_500m.onnx');
 
-    await modelFile.writeAsBytes(
-      modelBytes.buffer.asUint8List(),
-      flush: true,
-    );
+    await modelFile.writeAsBytes(modelBytes.buffer.asUint8List(), flush: true);
 
     final options = OrtSessionOptions();
 
-    _session = OrtSession.fromFile(
-      modelFile,
-      options,
-    );
+    _session = OrtSession.fromFile(modelFile, options);
 
     return _session!;
   }

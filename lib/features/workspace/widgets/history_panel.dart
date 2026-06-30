@@ -51,36 +51,25 @@ class _HistoryItem extends StatelessWidget {
   final String title;
   final String score;
 
-  const _HistoryItem(
-    this.title,
-    this.score,
-  );
+  const _HistoryItem(this.title, this.score);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 42,
       margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: const Color(0xFF6B5215),
-          width: .5,
-        ),
+        border: Border.all(color: const Color(0xFF6B5215), width: .5),
       ),
       child: Row(
         children: [
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-              ),
+              style: const TextStyle(color: Colors.white, fontSize: 11),
             ),
           ),
           Text(

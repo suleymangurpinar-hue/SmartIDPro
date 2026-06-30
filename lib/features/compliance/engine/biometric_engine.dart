@@ -9,18 +9,13 @@ import '../services/icao_engine.dart';
 import 'face_analysis_result.dart';
 
 class BiometricEngine {
-  final FaceDetectorService _faceDetector =
-      FaceDetectorService();
+  final FaceDetectorService _faceDetector = FaceDetectorService();
 
-  final FaceLandmarkService _landmarkService =
-      FaceLandmarkService();
+  final FaceLandmarkService _landmarkService = FaceLandmarkService();
 
-  final IcaoEngine _icaoEngine =
-      IcaoEngine();
+  final IcaoEngine _icaoEngine = IcaoEngine();
 
-  Future<FaceAnalysisResult> analyze(
-    String imagePath,
-  ) async {
+  Future<FaceAnalysisResult> analyze(String imagePath) async {
     final file = File(imagePath);
 
     if (!file.existsSync()) {
@@ -35,76 +30,51 @@ class BiometricEngine {
       return FaceAnalysisResult.empty();
     }
 
-    final face =
-        await _faceDetector.detectFace(
-      imagePath,
-    );
+    final face = await _faceDetector.detectFace(imagePath);
 
     if (!face.faceFound) {
       return FaceAnalysisResult.empty();
     }
 
-    final landmarks =
-        await _landmarkService.detectLandmarks(
-      imagePath,
-    );
+    final landmarks = await _landmarkService.detectLandmarks(imagePath);
 
-    final icao =
-        _icaoEngine.evaluate(
+    final icao = _icaoEngine.evaluate(
       eyeY: landmarks.leftEyeY,
       faceHeight: face.height,
     );
 
-    final resolutionScore =
-        _calculateResolutionScore(
+    final resolutionScore = _calculateResolutionScore(
       image.width,
       image.height,
     );
 
-    final backgroundScore =
-        _calculateBackgroundScore(
-      image,
-    );
+    final backgroundScore = _calculateBackgroundScore(image);
 
     final overallScore =
-        (
-              icao.eyeScore +
-              icao.headScore +
-              resolutionScore +
-              backgroundScore
-            ) /
-            4;
+        (icao.eyeScore + icao.headScore + resolutionScore + backgroundScore) /
+        4;
 
     return FaceAnalysisResult(
       photoLoaded: true,
       faceDetected: true,
 
-      eyePositionOk:
-          icao.eyeScore >= 80,
+      eyePositionOk: icao.eyeScore >= 80,
 
-      headRatioOk:
-          icao.headScore >= 80,
+      headRatioOk: icao.headScore >= 80,
 
-      backgroundOk:
-          backgroundScore >= 70,
+      backgroundOk: backgroundScore >= 70,
 
-      icaoReady:
-          overallScore >= 85,
+      icaoReady: overallScore >= 85,
 
-      overallScore:
-          overallScore,
+      overallScore: overallScore,
 
-      eyeScore:
-          icao.eyeScore,
+      eyeScore: icao.eyeScore,
 
-      headScore:
-          icao.headScore,
+      headScore: icao.headScore,
 
-      backgroundScore:
-          backgroundScore,
+      backgroundScore: backgroundScore,
 
-      resolutionScore:
-          resolutionScore,
+      resolutionScore: resolutionScore,
 
       faceX: face.x,
       faceY: face.y,
@@ -114,12 +84,8 @@ class BiometricEngine {
     );
   }
 
-  double _calculateResolutionScore(
-    int width,
-    int height,
-  ) {
-    final megapixel =
-        (width * height) / 1000000;
+  double _calculateResolutionScore(int width, int height) {
+    final megapixel = (width * height) / 1000000;
 
     if (megapixel >= 8) {
       return 100;
@@ -136,28 +102,20 @@ class BiometricEngine {
     return 60;
   }
 
-  double _calculateBackgroundScore(
-    img.Image image,
-  ) {
+  double _calculateBackgroundScore(img.Image image) {
     final width = image.width;
     final height = image.height;
 
     double brightness = 0;
     int count = 0;
 
-    final step =
-        (width ~/ 80).clamp(1, 20);
+    final step = (width ~/ 80).clamp(1, 20);
 
     for (int y = 0; y < height; y += step) {
       for (int x = 0; x < width; x += step) {
-        final pixel =
-            image.getPixel(x, y);
+        final pixel = image.getPixel(x, y);
 
-        brightness +=
-            (pixel.r +
-                    pixel.g +
-                    pixel.b) /
-                3;
+        brightness += (pixel.r + pixel.g + pixel.b) / 3;
 
         count++;
       }

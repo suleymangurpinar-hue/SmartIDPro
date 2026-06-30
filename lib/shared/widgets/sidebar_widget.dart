@@ -12,26 +12,13 @@ class SidebarWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(32),
         child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 40,
-            sigmaY: 40,
-          ),
+          filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(
-                255,
-                255,
-                255,
-                .04,
-              ),
+              color: const Color.fromRGBO(255, 255, 255, .04),
               borderRadius: BorderRadius.circular(32),
               border: Border.all(
-                color: const Color.fromRGBO(
-                  255,
-                  255,
-                  255,
-                  .08,
-                ),
+                color: const Color.fromRGBO(255, 255, 255, .08),
               ),
             ),
             child: Column(
@@ -42,15 +29,11 @@ class SidebarWidget extends StatelessWidget {
                   width: 54,
                   height: 54,
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(18),
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF6FAAFF),
-                        Color(0xFF4F8CFF),
-                      ],
+                      colors: [Color(0xFF6FAAFF), Color(0xFF4F8CFF)],
                     ),
                     boxShadow: const [
                       BoxShadow(
@@ -72,34 +55,15 @@ class SidebarWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: const [
-                      _MenuIcon(
-                        Icons.grid_view_rounded,
-                        true,
-                      ),
-                      _MenuIcon(
-                        Icons.image_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.auto_fix_high_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.crop_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.psychology_alt_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.verified_user_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.print_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.folder_outlined,
-                      ),
-                      _MenuIcon(
-                        Icons.history_outlined,
-                      ),
+                      _MenuIcon(Icons.grid_view_rounded, true),
+                      _MenuIcon(Icons.image_outlined),
+                      _MenuIcon(Icons.auto_fix_high_outlined),
+                      _MenuIcon(Icons.crop_outlined),
+                      _MenuIcon(Icons.psychology_alt_outlined),
+                      _MenuIcon(Icons.verified_user_outlined),
+                      _MenuIcon(Icons.print_outlined),
+                      _MenuIcon(Icons.folder_outlined),
+                      _MenuIcon(Icons.history_outlined),
                     ],
                   ),
                 ),
@@ -107,19 +71,12 @@ class SidebarWidget extends StatelessWidget {
                 Container(
                   width: 52,
                   height: 52,
-                  margin: const EdgeInsets.only(
-                    bottom: 18,
-                  ),
+                  margin: const EdgeInsets.only(bottom: 18),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: const Color(0xFF202634),
                     border: Border.all(
-                      color: const Color.fromRGBO(
-                        255,
-                        255,
-                        255,
-                        .08,
-                      ),
+                      color: const Color.fromRGBO(255, 255, 255, .08),
                     ),
                   ),
                   child: const Icon(
@@ -141,33 +98,21 @@ class _MenuIcon extends StatelessWidget {
   final IconData icon;
   final bool active;
 
-  const _MenuIcon(
-    this.icon, [
-    this.active = false,
-  ]);
+  const _MenuIcon(this.icon, [this.active = false]);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 50,
       height: 50,
-      margin: const EdgeInsets.only(
-        bottom: 12,
-      ),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: active
-            ? const Color(0xFF4F8CFF)
-            : Colors.transparent,
+        color: active ? const Color(0xFF4F8CFF) : Colors.transparent,
         border: Border.all(
           color: active
               ? Colors.transparent
-              : const Color.fromRGBO(
-                  255,
-                  255,
-                  255,
-                  .06,
-                ),
+              : const Color.fromRGBO(255, 255, 255, .06),
         ),
         boxShadow: active
             ? const [
@@ -182,9 +127,7 @@ class _MenuIcon extends StatelessWidget {
       child: Icon(
         icon,
         size: 22,
-        color: active
-            ? Colors.white
-            : Colors.white60,
+        color: active ? Colors.white : Colors.white60,
       ),
     );
   }

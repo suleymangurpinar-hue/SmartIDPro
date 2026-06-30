@@ -18,24 +18,18 @@ class WorkspaceScreen extends StatefulWidget {
   const WorkspaceScreen({super.key});
 
   @override
-  State<WorkspaceScreen> createState() =>
-      _WorkspaceScreenState();
+  State<WorkspaceScreen> createState() => _WorkspaceScreenState();
 }
 
-class _WorkspaceScreenState
-    extends State<WorkspaceScreen> {
+class _WorkspaceScreenState extends State<WorkspaceScreen> {
   String? imagePath;
 
   Future<void> openPhoto() async {
-    final result =
-        await FilePicker.platform.pickFiles(
-      type: FileType.image,
-    );
+    final result = await FilePicker.platform.pickFiles(type: FileType.image);
 
     if (result == null) return;
 
-    final path =
-        result.files.single.path;
+    final path = result.files.single.path;
 
     if (path == null) return;
 
@@ -45,9 +39,7 @@ class _WorkspaceScreenState
 
     if (!mounted) return;
 
-    await context
-        .read<ComplianceProvider>()
-        .analyzePhoto(path);
+    await context.read<ComplianceProvider>().analyzePhoto(path);
   }
 
   @override
@@ -58,11 +50,7 @@ class _WorkspaceScreenState
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF0F1115),
-              Color(0xFF171A21),
-              Color(0xFF0F1115),
-            ],
+            colors: [Color(0xFF0F1115), Color(0xFF171A21), Color(0xFF0F1115)],
           ),
         ),
         child: Row(
@@ -71,15 +59,12 @@ class _WorkspaceScreenState
 
             Expanded(
               child: SingleChildScrollView(
-                padding:
-                    const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 child: Column(
                   children: [
                     const TopToolbar(),
 
-                    const SizedBox(
-                      height: 18,
-                    ),
+                    const SizedBox(height: 18),
 
                     SizedBox(
                       height: 700,
@@ -87,62 +72,37 @@ class _WorkspaceScreenState
                         children: [
                           Expanded(
                             flex: 8,
-                            child:
-                                PhotoWorkspace(
-                              imagePath:
-                                  imagePath,
-                            ),
+                            child: PhotoWorkspace(imagePath: imagePath),
                           ),
 
-                          const SizedBox(
-                            width: 18,
-                          ),
+                          const SizedBox(width: 18),
 
                           const Expanded(
                             flex: 3,
-                            child:
-                                BiometricAnalysisPanel(),
+                            child: BiometricAnalysisPanel(),
                           ),
                         ],
                       ),
                     ),
 
-                    const SizedBox(
-                      height: 18,
-                    ),
+                    const SizedBox(height: 18),
 
                     SizedBox(
                       height: 200,
                       child: Row(
                         children: [
-                          const Expanded(
-                            flex: 2,
-                            child:
-                                DocumentTypePanel(),
-                          ),
+                          const Expanded(flex: 2, child: DocumentTypePanel()),
 
-                          const SizedBox(
-                            width: 18,
-                          ),
+                          const SizedBox(width: 18),
 
-                          const Expanded(
-                            flex: 1,
-                            child:
-                                HistoryPanel(),
-                          ),
+                          const Expanded(flex: 1, child: HistoryPanel()),
                         ],
                       ),
                     ),
 
-                    const SizedBox(
-                      height: 18,
-                    ),
+                    const SizedBox(height: 18),
 
-                    const SizedBox(
-                      height: 270,
-                      child:
-                          PrintLayoutPreview(),
-                    ),
+                    const SizedBox(height: 270, child: PrintLayoutPreview()),
                   ],
                 ),
               ),
@@ -151,18 +111,12 @@ class _WorkspaceScreenState
         ),
       ),
 
-      floatingActionButton:
-          FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: openPhoto,
-        backgroundColor:
-            const Color(0xFF4F8CFF),
+        backgroundColor: const Color(0xFF4F8CFF),
         foregroundColor: Colors.white,
-        icon: const Icon(
-          Icons.photo_library_outlined,
-        ),
-        label: const Text(
-          'FOTOĞRAF AÇ',
-        ),
+        icon: const Icon(Icons.photo_library_outlined),
+        label: const Text('FOTOĞRAF AÇ'),
       ),
     );
   }

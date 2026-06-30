@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PrintLayoutPanel extends StatefulWidget {
-  const PrintLayoutPanel({
-    super.key,
-  });
+  const PrintLayoutPanel({super.key});
 
   @override
-  State<PrintLayoutPanel> createState() =>
-      _PrintLayoutPanelState();
+  State<PrintLayoutPanel> createState() => _PrintLayoutPanelState();
 }
 
-class _PrintLayoutPanelState
-    extends State<PrintLayoutPanel> {
+class _PrintLayoutPanelState extends State<PrintLayoutPanel> {
   String paper = "10x15";
 
   String layout = "8";
@@ -21,29 +17,19 @@ class _PrintLayoutPanelState
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF111827),
-        borderRadius:
-            BorderRadius.circular(24),
-        border: Border.all(
-          color: const Color.fromRGBO(
-            255,
-            255,
-            255,
-            .06,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color.fromRGBO(255, 255, 255, .06)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               "PRINT LAYOUT",
               style: TextStyle(
                 color: Colors.white,
-                fontWeight:
-                    FontWeight.bold,
+                fontWeight: FontWeight.bold,
                 letterSpacing: 1.2,
               ),
             ),
@@ -78,53 +64,28 @@ class _PrintLayoutPanelState
                 child: AspectRatio(
                   aspectRatio: 1.5,
                   child: Container(
-                    decoration:
-                        BoxDecoration(
-                      color:
-                          Colors.white,
-                      borderRadius:
-                          BorderRadius.circular(
-                        12,
-                      ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
-                      padding:
-                          const EdgeInsets.all(
-                        10,
-                      ),
+                      padding: const EdgeInsets.all(10),
                       child: GridView.count(
-                        physics:
-                            const NeverScrollableScrollPhysics(),
-                        crossAxisCount:
-                            _crossCount(),
-                        crossAxisSpacing:
-                            6,
-                        mainAxisSpacing:
-                            6,
-                        children:
-                            List.generate(
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: _crossCount(),
+                        crossAxisSpacing: 6,
+                        mainAxisSpacing: 6,
+                        children: List.generate(
                           _photoCount(),
-                          (index) =>
-                              Container(
-                            decoration:
-                                BoxDecoration(
-                              color:
-                                  const Color(
-                                0xFFE5E7EB,
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(
-                                6,
-                              ),
+                          (index) => Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE5E7EB),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                            child:
-                                const Icon(
-                              Icons
-                                  .person,
+                            child: const Icon(
+                              Icons.person,
                               size: 18,
-                              color: Color(
-                                0xFF6B7280,
-                              ),
+                              color: Color(0xFF6B7280),
                             ),
                           ),
                         ),
@@ -139,20 +100,11 @@ class _PrintLayoutPanelState
 
             Row(
               children: [
-                const Icon(
-                  Icons.print,
-                  color:
-                      Color(0xFFD4A64A),
-                  size: 18,
-                ),
+                const Icon(Icons.print, color: Color(0xFFD4A64A), size: 18),
                 const SizedBox(width: 8),
                 Text(
                   "$layout Adet • $paper",
-                  style:
-                      const TextStyle(
-                    color:
-                        Colors.white70,
-                  ),
+                  style: const TextStyle(color: Colors.white70),
                 ),
               ],
             ),
@@ -162,9 +114,7 @@ class _PrintLayoutPanelState
     );
   }
 
-  Widget _paperButton(
-    String value,
-  ) {
+  Widget _paperButton(String value) {
     final active = paper == value;
 
     return Expanded(
@@ -176,32 +126,17 @@ class _PrintLayoutPanelState
         },
         child: Container(
           height: 36,
-          margin:
-              const EdgeInsets.only(
-            right: 4,
-          ),
+          margin: const EdgeInsets.only(right: 4),
           decoration: BoxDecoration(
-            color: active
-                ? const Color(
-                    0xFFD4A64A,
-                  )
-                : const Color(
-                    0xFF1F2937,
-                  ),
-            borderRadius:
-                BorderRadius.circular(
-              10,
-            ),
+            color: active ? const Color(0xFFD4A64A) : const Color(0xFF1F2937),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Center(
             child: Text(
               value,
               style: TextStyle(
-                color: active
-                    ? Colors.black
-                    : Colors.white,
-                fontWeight:
-                    FontWeight.bold,
+                color: active ? Colors.black : Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -210,11 +145,8 @@ class _PrintLayoutPanelState
     );
   }
 
-  Widget _layoutButton(
-    String value,
-  ) {
-    final active =
-        layout == value;
+  Widget _layoutButton(String value) {
+    final active = layout == value;
 
     return Expanded(
       child: GestureDetector(
@@ -225,30 +157,17 @@ class _PrintLayoutPanelState
         },
         child: Container(
           height: 34,
-          margin:
-              const EdgeInsets.only(
-            right: 4,
-          ),
+          margin: const EdgeInsets.only(right: 4),
           decoration: BoxDecoration(
-            color: active
-                ? const Color(
-                    0xFF4F8CFF,
-                  )
-                : const Color(
-                    0xFF1F2937,
-                  ),
-            borderRadius:
-                BorderRadius.circular(
-              10,
-            ),
+            color: active ? const Color(0xFF4F8CFF) : const Color(0xFF1F2937),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Center(
             child: Text(
               value,
               style: const TextStyle(
                 color: Colors.white,
-                fontWeight:
-                    FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),

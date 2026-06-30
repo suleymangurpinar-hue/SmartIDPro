@@ -31,16 +31,11 @@ class FaceDetectionResult {
 }
 
 class FaceDetectorService {
-  Future<FaceDetectionResult> detectFace(
-    String imagePath,
-  ) async {
+  Future<FaceDetectionResult> detectFace(String imagePath) async {
     try {
-      final session =
-          await OnnxLoader.session();
+      final session = await OnnxLoader.session();
 
-      debugPrint(
-        'ONNX SESSION LOADED: $session',
-      );
+      debugPrint('ONNX SESSION LOADED: $session');
 
       return const FaceDetectionResult(
         faceFound: true,
@@ -50,9 +45,7 @@ class FaceDetectorService {
         height: 0.48,
       );
     } catch (e) {
-      debugPrint(
-        'ONNX ERROR: $e',
-      );
+      debugPrint('ONNX ERROR: $e');
 
       return FaceDetectionResult.empty();
     }

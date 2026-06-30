@@ -17,10 +17,7 @@ class TopToolbar extends StatelessWidget {
         children: [
           const Text(
             'SMART ID PRO',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
           ),
           const Spacer(),
           _btn(Icons.photo_library_outlined, 'Import'),
@@ -37,20 +34,13 @@ class TopToolbar extends StatelessWidget {
   static Widget _btn(IconData icon, String title) {
     return Container(
       margin: const EdgeInsets.only(left: 10),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 10,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF151E2F),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
-        children: [
-          Icon(icon, size: 18),
-          const SizedBox(width: 6),
-          Text(title),
-        ],
+        children: [Icon(icon, size: 18), const SizedBox(width: 6), Text(title)],
       ),
     );
   }

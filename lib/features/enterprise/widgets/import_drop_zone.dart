@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ImportDropZone
-    extends StatelessWidget {
+class ImportDropZone extends StatelessWidget {
   final VoidCallback onImport;
 
-  const ImportDropZone({
-    super.key,
-    required this.onImport,
-  });
+  const ImportDropZone({super.key, required this.onImport});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +11,10 @@ class ImportDropZone
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius:
-              BorderRadius.circular(
-            30,
-          ),
+          borderRadius: BorderRadius.circular(30),
           onTap: onImport,
           child: Container(
-            decoration:
-                BoxDecoration(
-              borderRadius:
-                  BorderRadius.circular(
-                30,
-              ),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
           ),
         ),
       ),

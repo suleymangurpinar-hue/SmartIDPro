@@ -1,9 +1,4 @@
-enum QueueStatus {
-  queued,
-  processing,
-  ready,
-  exported,
-}
+enum QueueStatus { queued, processing, ready, exported }
 
 class ProcessQueueItem {
   final String name;

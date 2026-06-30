@@ -10,17 +10,12 @@ class PrintPreview extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF0E1420),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(
-          color: const Color(0xFF1D2A40),
-        ),
+        border: Border.all(color: const Color(0xFF1D2A40)),
       ),
       child: const Center(
         child: Text(
           'PRINT LAYOUT PREVIEW',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
     );

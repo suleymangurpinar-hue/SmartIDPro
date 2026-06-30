@@ -1,72 +1,53 @@
 import 'package:flutter/material.dart';
 
 class ProcessQueuePanel extends StatelessWidget {
-  const ProcessQueuePanel({
-    super.key,
-  });
+  const ProcessQueuePanel({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF111827),
-        borderRadius:
-            BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(
-            0x22FFFFFF,
-          ),
+          color: const Color(0x22FFFFFF),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(
-          18,
-        ),
+        padding: const EdgeInsets.all(18),
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "PROCESS QUEUE",
+              'PROCESS QUEUE',
               style: TextStyle(
                 color: Colors.white,
-                fontWeight:
-                    FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 14,
-            ),
+            const SizedBox(height: 14),
             Expanded(
               child: ListView(
                 children: const [
                   _JobTile(
-                    "Ahmet_Yilmaz.jpg",
-                    "PROCESSING",
-                    Color(
-                      0xFFD4A64A,
-                    ),
+                    'Ahmet_Yilmaz.jpg',
+                    'PROCESSING',
+                    Color(0xFFD4A64A),
                   ),
                   _JobTile(
-                    "Ayse_Kaya.jpg",
-                    "READY",
-                    Color(
-                      0xFF34D399,
-                    ),
+                    'Ayse_Kaya.jpg',
+                    'READY',
+                    Color(0xFF34D399),
                   ),
                   _JobTile(
-                    "Mehmet_Demir.jpg",
-                    "EXPORTED",
-                    Color(
-                      0xFF60A5FA,
-                    ),
+                    'Mehmet_Demir.jpg',
+                    'EXPORTED',
+                    Color(0xFF60A5FA),
                   ),
                   _JobTile(
-                    "Passport_001.jpg",
-                    "QUEUED",
-                    Color(
-                      0xFF9CA3AF,
-                    ),
+                    'Passport_001.jpg',
+                    'QUEUED',
+                    Color(0xFF9CA3AF),
                   ),
                 ],
               ),
@@ -92,21 +73,13 @@ class _JobTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-          const EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 10,
       ),
-      padding:
-          const EdgeInsets.all(
-        12,
-      ),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color:
-            const Color(0xFF182232),
-        borderRadius:
-            BorderRadius.circular(
-          14,
-        ),
+        color: const Color(0xFF182232),
+        borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
         children: [
@@ -115,29 +88,29 @@ class _JobTile extends StatelessWidget {
             height: 10,
             decoration: BoxDecoration(
               color: color,
-              shape:
-                  BoxShape.circle,
+              shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               title,
-              style:
-                  const TextStyle(
-                color:
-                    Colors.white,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
               ),
             ),
           ),
-          Text(
-            status,
-            style: TextStyle(
-              color: color,
-              fontWeight:
-                  FontWeight.bold,
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              status,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: color,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

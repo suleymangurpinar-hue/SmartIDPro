@@ -15,26 +15,20 @@ class AppColors {
 
   static const text = Colors.white;
 
-  static const secondaryText =
-      Color(0xFF9CA3AF);
+  static const secondaryText = Color(0xFF9CA3AF);
 
-  static const border =
-      Color.fromRGBO(255, 255, 255, .08);
+  static const border = Color.fromRGBO(255, 255, 255, .08);
 
-  static const glass =
-      Color.fromRGBO(255, 255, 255, .05);
+  static const glass = Color.fromRGBO(255, 255, 255, .05);
 }
 
 class AppTheme {
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor:
-        AppColors.background,
+    scaffoldBackgroundColor: AppColors.background,
 
     fontFamily: 'SF Pro Display',
 
-    colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary,
-    ),
+    colorScheme: const ColorScheme.dark(primary: AppColors.primary),
   );
 }

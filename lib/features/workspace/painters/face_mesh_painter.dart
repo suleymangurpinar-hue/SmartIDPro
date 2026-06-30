@@ -7,8 +7,7 @@ class FaceMeshPainter extends CustomPainter {
       ..color = const Color(0x99D4AF37)
       ..strokeWidth = 1;
 
-    final dotPaint = Paint()
-      ..color = const Color(0xFFD4AF37);
+    final dotPaint = Paint()..color = const Color(0xFFD4AF37);
 
     final points = <Offset>[
       Offset(size.width * .50, size.height * .18),
@@ -28,26 +27,16 @@ class FaceMeshPainter extends CustomPainter {
     ];
 
     for (final p in points) {
-      canvas.drawCircle(
-        p,
-        4,
-        dotPaint,
-      );
+      canvas.drawCircle(p, 4, dotPaint);
     }
 
     for (int i = 0; i < points.length - 1; i++) {
-      canvas.drawLine(
-        points[i],
-        points[i + 1],
-        paint,
-      );
+      canvas.drawLine(points[i], points[i + 1], paint);
     }
   }
 
   @override
-  bool shouldRepaint(
-    covariant CustomPainter oldDelegate,
-  ) {
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
 }

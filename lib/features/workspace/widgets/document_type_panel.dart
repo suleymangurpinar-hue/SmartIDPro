@@ -66,17 +66,11 @@ class _Doc extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF121212),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: const Color(0xFF6B5215),
-          width: .6,
-        ),
+        border: Border.all(color: const Color(0xFF6B5215), width: .6),
       ),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 11,
-        ),
+        style: const TextStyle(color: Colors.white, fontSize: 11),
       ),
     );
   }

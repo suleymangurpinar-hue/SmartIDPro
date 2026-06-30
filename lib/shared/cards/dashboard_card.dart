@@ -22,17 +22,9 @@ class DashboardCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                size: 54,
-              ),
+              Icon(icon, size: 54),
               const SizedBox(height: 16),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-              ),
+              Text(title, style: const TextStyle(fontSize: 18)),
             ],
           ),
         ),

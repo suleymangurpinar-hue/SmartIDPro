@@ -10,9 +10,7 @@ class RightPanel extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF0E1420),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(
-          color: const Color(0xFF1D2A40),
-        ),
+        border: Border.all(color: const Color(0xFF1D2A40)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -21,10 +19,7 @@ class RightPanel extends StatelessWidget {
           children: [
             const Text(
               'AI STUDIO',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w800,
-              ),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 20),
             _item('AI Background'),
@@ -38,21 +33,16 @@ class RightPanel extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF2F6BFF),
-                    Color(0xFF5F96FF),
-                  ],
+                  colors: [Color(0xFF2F6BFF), Color(0xFF5F96FF)],
                 ),
               ),
               child: const Center(
                 child: Text(
                   'PROCESS PHOTO',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

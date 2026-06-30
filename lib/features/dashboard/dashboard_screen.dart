@@ -22,9 +22,7 @@ class DashboardScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     decoration: const BoxDecoration(
                       border: Border(
-                        bottom: BorderSide(
-                          color: Color(0xFF182235),
-                        ),
+                        bottom: BorderSide(color: Color(0xFF182235)),
                       ),
                     ),
                     child: Row(
@@ -140,8 +138,7 @@ class DashboardScreen extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(22),
                               child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     "AI CONTROL CENTER",
@@ -158,10 +155,7 @@ class DashboardScreen extends StatelessWidget {
                                     "White / Blue / Gray",
                                   ),
 
-                                  _panelCard(
-                                    "Biometric",
-                                    "ISO / ICAO Rules",
-                                  ),
+                                  _panelCard("Biometric", "ISO / ICAO Rules"),
 
                                   _panelCard(
                                     "Face Retouch",
@@ -190,9 +184,7 @@ class DashboardScreen extends StatelessWidget {
                                     height: 58,
                                     child: ElevatedButton(
                                       onPressed: () {},
-                                      child: const Text(
-                                        "PROCESS PHOTO",
-                                      ),
+                                      child: const Text("PROCESS PHOTO"),
                                     ),
                                   ),
                                 ],
@@ -233,10 +225,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  static Widget _panelCard(
-    String title,
-    String subtitle,
-  ) {
+  static Widget _panelCard(String title, String subtitle) {
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(16),
@@ -257,21 +246,13 @@ class DashboardScreen extends StatelessWidget {
           const SizedBox(width: 14),
           Expanded(
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: Colors.white54,
-                  ),
-                ),
+                Text(subtitle, style: const TextStyle(color: Colors.white54)),
               ],
             ),
           ),

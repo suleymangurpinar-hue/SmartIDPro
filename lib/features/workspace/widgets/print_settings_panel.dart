@@ -59,12 +59,7 @@ class _PrintOption extends StatelessWidget {
         color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
+      child: Text(title, style: const TextStyle(color: Colors.white)),
     );
   }
 }

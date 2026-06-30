@@ -48,17 +48,10 @@ class _ImportScreenState extends State<ImportScreen> {
           children: [
             const Text(
               'Import Center',
-              style: TextStyle(
-                fontSize: 34,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 25),
-            Expanded(
-              child: ImportDropzone(
-                onOpenFile: openFile,
-              ),
-            ),
+            Expanded(child: ImportDropzone(onOpenFile: openFile)),
             const SizedBox(height: 20),
             if (selectedFile != null)
               Container(

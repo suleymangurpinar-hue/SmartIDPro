@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "importPhoto": "Import Photo",
+  "aiTools": "AI Tools",
+  "background": "Background",
+  "printSettings": "Print Settings",
+  "processQueue": "Process Queue",
+  "templateLibrary": "Template Library",
+  "face": "Face",
+  "eyes": "Eyes",
+  "head": "Head",
+  "icaoReady": "ICAO Ready",
+  "faceDetected": "Face Detected",
+  "settings": "Settings",
+  "language": "Language",
+  "comingSoon": "Coming Soon",
+  "aiRetouch": "AI Retouch",
+  "aiClothing": "AI Clothing",
+  "icaoFix": "ICAO Fix",
+  "export": "Export"
+}

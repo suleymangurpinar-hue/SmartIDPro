@@ -7,10 +7,7 @@ import '../../../shared/animations/gold_border_card.dart';
 class CompliancePanel extends StatelessWidget {
   final bool photoLoaded;
 
-  const CompliancePanel({
-    super.key,
-    required this.photoLoaded,
-  });
+  const CompliancePanel({super.key, required this.photoLoaded});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +26,7 @@ class CompliancePanel extends StatelessWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "BİYOMETRİK ANALİZ",
@@ -50,23 +46,19 @@ class CompliancePanel extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color:
-                              const Color(0xFFD4AF37),
+                          color: const Color(0xFFD4AF37),
                           width: 3,
                         ),
                       ),
                       child: Center(
                         child: Text(
                           photoLoaded
-                              ? result.overallScore
-                                  .toStringAsFixed(0)
+                              ? result.overallScore.toStringAsFixed(0)
                               : "--",
                           style: const TextStyle(
                             fontSize: 52,
-                            fontWeight:
-                                FontWeight.bold,
-                            color:
-                                Color(0xFFD4AF37),
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFD4AF37),
                           ),
                         ),
                       ),
@@ -75,54 +67,33 @@ class CompliancePanel extends StatelessWidget {
 
                   const SizedBox(height: 30),
 
-                  _scoreItem(
-                    "Göz Hizası",
-                    result.eyeScore,
-                  ),
+                  _scoreItem("Göz Hizası", result.eyeScore),
 
-                  _scoreItem(
-                    "Baş Oranı",
-                    result.headScore,
-                  ),
+                  _scoreItem("Baş Oranı", result.headScore),
 
-                  _scoreItem(
-                    "Arka Plan",
-                    result.backgroundScore,
-                  ),
+                  _scoreItem("Arka Plan", result.backgroundScore),
 
-                  _scoreItem(
-                    "Çözünürlük",
-                    result.resolutionScore,
-                  ),
+                  _scoreItem("Çözünürlük", result.resolutionScore),
 
                   const SizedBox(height: 20),
 
                   Container(
                     width: double.infinity,
-                    padding:
-                        const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: result.icaoReady
-                          ? const Color(
-                              0xFF102410)
-                          : const Color(
-                              0xFF241010),
-                      borderRadius:
-                          BorderRadius.circular(
-                        14,
-                      ),
+                          ? const Color(0xFF102410)
+                          : const Color(0xFF241010),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     child: Text(
-                      result.icaoReady
-                          ? "ICAO UYUMLU"
-                          : "ICAO UYUMLU DEĞİL",
+                      result.icaoReady ? "ICAO UYUMLU" : "ICAO UYUMLU DEĞİL",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: result.icaoReady
                             ? Colors.greenAccent
                             : Colors.redAccent,
-                        fontWeight:
-                            FontWeight.bold,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -135,34 +106,22 @@ class CompliancePanel extends StatelessWidget {
     );
   }
 
-  Widget _scoreItem(
-    String title,
-    double value,
-  ) {
+  Widget _scoreItem(String title, double value) {
     return Padding(
-      padding: const EdgeInsets.only(
-        bottom: 18,
-      ),
+      padding: const EdgeInsets.only(bottom: 18),
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+                child: Text(title, style: const TextStyle(color: Colors.white)),
               ),
               Text(
                 "${value.toStringAsFixed(0)}%",
                 style: const TextStyle(
                   color: Color(0xFFD4AF37),
-                  fontWeight:
-                      FontWeight.bold,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -171,12 +130,8 @@ class CompliancePanel extends StatelessWidget {
           LinearProgressIndicator(
             value: value / 100,
             minHeight: 6,
-            backgroundColor:
-                Colors.white10,
-            valueColor:
-                const AlwaysStoppedAnimation(
-              Color(0xFFD4AF37),
-            ),
+            backgroundColor: Colors.white10,
+            valueColor: const AlwaysStoppedAnimation(Color(0xFFD4AF37)),
           ),
         ],
       ),

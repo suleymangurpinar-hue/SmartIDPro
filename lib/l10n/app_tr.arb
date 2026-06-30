@@ -1,0 +1,21 @@
+{
+  "@@locale": "tr",
+  "importPhoto": "Fotoğraf İçe Aktar",
+  "aiTools": "Yapay Zeka Araçları",
+  "background": "Arka Plan",
+  "printSettings": "Baskı Ayarları",
+  "processQueue": "İşlem Sırası",
+  "templateLibrary": "Şablon Kütüphanesi",
+  "face": "Yüz",
+  "eyes": "Gözler",
+  "head": "Baş",
+  "icaoReady": "ICAO Hazır",
+  "faceDetected": "Yüz Algılandı",
+  "settings": "Ayarlar",
+  "language": "Dil",
+  "comingSoon": "Yakında",
+  "aiRetouch": "Yapay Zeka Rötuş",
+  "aiClothing": "Yapay Zeka Kıyafet",
+  "icaoFix": "ICAO Düzeltme",
+  "export": "Dışa Aktar"
+}

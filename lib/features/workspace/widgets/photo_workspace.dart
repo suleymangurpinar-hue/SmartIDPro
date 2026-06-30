@@ -11,15 +11,11 @@ import 'scan_overlay.dart';
 class PhotoWorkspace extends StatelessWidget {
   final String? imagePath;
 
-  const PhotoWorkspace({
-    super.key,
-    this.imagePath,
-  });
+  const PhotoWorkspace({super.key, this.imagePath});
 
   @override
   Widget build(BuildContext context) {
-    final result =
-        context.watch<ComplianceProvider>().result;
+    final result = context.watch<ComplianceProvider>().result;
 
     return GoldBorderCard(
       radius: 36,
@@ -65,56 +61,37 @@ class PhotoWorkspace extends StatelessWidget {
           SizedBox(height: 12),
           Text(
             "RAW • JPG • PNG • HEIC",
-            style: TextStyle(
-              color: Colors.white54,
-              letterSpacing: 2,
-            ),
+            style: TextStyle(color: Colors.white54, letterSpacing: 2),
           ),
         ],
       ),
     );
   }
 
-  Widget _photoState(
-    dynamic result,
-    double width,
-    double height,
-  ) {
-    final faceLeft =
-        width * result.faceX;
+  Widget _photoState(dynamic result, double width, double height) {
+    final faceLeft = width * result.faceX;
 
-    final faceTop =
-        height * result.faceY;
+    final faceTop = height * result.faceY;
 
-    final faceWidth =
-        width * result.faceWidth;
+    final faceWidth = width * result.faceWidth;
 
-    final faceHeight =
-        height * result.faceHeight;
+    final faceHeight = height * result.faceHeight;
 
     return Stack(
       children: [
         Positioned.fill(
           child: ClipRRect(
-            borderRadius:
-                BorderRadius.circular(36),
-            child: Image.file(
-              File(imagePath!),
-              fit: BoxFit.contain,
-            ),
+            borderRadius: BorderRadius.circular(36),
+            child: Image.file(File(imagePath!), fit: BoxFit.contain),
           ),
         ),
 
-        const Positioned.fill(
-          child: ScanOverlay(),
-        ),
+        const Positioned.fill(child: ScanOverlay()),
 
         if (result.faceDetected)
           Positioned.fill(
             child: IgnorePointer(
-              child: CustomPaint(
-                painter: FaceMeshPainter(),
-              ),
+              child: CustomPaint(painter: FaceMeshPainter()),
             ),
           ),
 
@@ -126,19 +103,11 @@ class PhotoWorkspace extends StatelessWidget {
               width: faceWidth,
               height: faceHeight,
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(16),
-                border: Border.all(
-                  color: const Color(
-                    0xFF6AA8FF,
-                  ),
-                  width: 2,
-                ),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFF6AA8FF), width: 2),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(
-                      0x336AA8FF,
-                    ),
+                    color: Color(0x336AA8FF),
                     blurRadius: 24,
                     spreadRadius: 3,
                   ),
@@ -148,40 +117,24 @@ class PhotoWorkspace extends StatelessWidget {
           ),
 
         Positioned.fill(
-          child: Center(
-            child: Container(
-              width: 2,
-              color: Colors.white24,
-            ),
-          ),
+          child: Center(child: Container(width: 2, color: Colors.white24)),
         ),
 
         Positioned(
           left: 120,
           right: 120,
           top: height * 0.36,
-          child: Container(
-            height: 2,
-            color: const Color(
-              0x886AA8FF,
-            ),
-          ),
+          child: Container(height: 2, color: const Color(0x886AA8FF)),
         ),
 
         Positioned(
           left: 24,
           top: 24,
           child: _badge(
+            result.faceDetected ? "FACE DETECTED" : "NO FACE",
             result.faceDetected
-                ? "FACE DETECTED"
-                : "NO FACE",
-            result.faceDetected
-                ? const Color(
-                    0xFF34D399,
-                  )
-                : const Color(
-                    0xFFFF6B6B,
-                  ),
+                ? const Color(0xFF34D399)
+                : const Color(0xFFFF6B6B),
           ),
         ),
 
@@ -189,56 +142,33 @@ class PhotoWorkspace extends StatelessWidget {
           right: 24,
           top: 24,
           child: _badge(
+            result.icaoReady ? "ICAO READY" : "ICAO FAIL",
             result.icaoReady
-                ? "ICAO READY"
-                : "ICAO FAIL",
-            result.icaoReady
-                ? const Color(
-                    0xFF34D399,
-                  )
-                : const Color(
-                    0xFFFF6B6B,
-                  ),
+                ? const Color(0xFF34D399)
+                : const Color(0xFFFF6B6B),
           ),
         ),
 
         Positioned(
           right: 24,
           bottom: 24,
-          child: _scoreCard(
-            result.overallScore
-                .toStringAsFixed(0),
-          ),
+          child: _scoreCard(result.overallScore.toStringAsFixed(0)),
         ),
       ],
     );
   }
 
-  Widget _badge(
-    String text,
-    Color color,
-  ) {
+  Widget _badge(String text, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 14,
-        vertical: 8,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(
-          0xCC131A26,
-        ),
-        borderRadius:
-            BorderRadius.circular(20),
-        border: Border.all(
-          color: color,
-        ),
+        color: const Color(0xCC131A26),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color),
       ),
       child: Text(
         text,
-        style: TextStyle(
-          color: color,
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(color: color, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -248,16 +178,9 @@ class PhotoWorkspace extends StatelessWidget {
       width: 110,
       height: 110,
       decoration: BoxDecoration(
-        color: const Color(
-          0xCC131A26,
-        ),
-        borderRadius:
-            BorderRadius.circular(28),
-        border: Border.all(
-          color: const Color(
-            0xFF6AA8FF,
-          ),
-        ),
+        color: const Color(0xCC131A26),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: const Color(0xFF6AA8FF)),
       ),
       child: Center(
         child: Text(

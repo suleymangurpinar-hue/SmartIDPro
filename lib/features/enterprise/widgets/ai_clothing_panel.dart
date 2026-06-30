@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AiClothingPanel extends StatefulWidget {
-  const AiClothingPanel({
-    super.key,
-  });
+  const AiClothingPanel({super.key});
 
   @override
-  State<AiClothingPanel> createState() =>
-      _AiClothingPanelState();
+  State<AiClothingPanel> createState() => _AiClothingPanelState();
 }
 
-class _AiClothingPanelState
-    extends State<AiClothingPanel> {
+class _AiClothingPanelState extends State<AiClothingPanel> {
   bool male = true;
 
   int selected = 1;
@@ -36,35 +32,24 @@ class _AiClothingPanelState
       "Premium",
     ];
 
-    final items =
-        male ? maleItems : femaleItems;
+    final items = male ? maleItems : femaleItems;
 
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF111827),
-        borderRadius:
-            BorderRadius.circular(24),
-        border: Border.all(
-          color: const Color.fromRGBO(
-            255,
-            255,
-            255,
-            .06,
-          ),
-        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: const Color.fromRGBO(255, 255, 255, .06)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               "AI CLOTHING",
               style: TextStyle(
                 color: Colors.white,
-                fontWeight:
-                    FontWeight.bold,
+                fontWeight: FontWeight.bold,
                 letterSpacing: 1.2,
               ),
             ),
@@ -74,13 +59,8 @@ class _AiClothingPanelState
             Container(
               height: 42,
               decoration: BoxDecoration(
-                color: const Color(
-                  0xFF1F2937,
-                ),
-                borderRadius:
-                    BorderRadius.circular(
-                  12,
-                ),
+                color: const Color(0xFF1F2937),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
                 children: [
@@ -92,33 +72,18 @@ class _AiClothingPanelState
                         });
                       },
                       child: Container(
-                        decoration:
-                            BoxDecoration(
+                        decoration: BoxDecoration(
                           color: male
-                              ? const Color(
-                                  0xFFD4A64A,
-                                )
-                              : Colors
-                                  .transparent,
-                          borderRadius:
-                              BorderRadius
-                                  .circular(
-                            12,
-                          ),
+                              ? const Color(0xFFD4A64A)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(
                           child: Text(
                             "Male",
-                            style:
-                                TextStyle(
-                              color: male
-                                  ? Colors
-                                      .black
-                                  : Colors
-                                      .white70,
-                              fontWeight:
-                                  FontWeight
-                                      .bold,
+                            style: TextStyle(
+                              color: male ? Colors.black : Colors.white70,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -134,33 +99,18 @@ class _AiClothingPanelState
                         });
                       },
                       child: Container(
-                        decoration:
-                            BoxDecoration(
+                        decoration: BoxDecoration(
                           color: !male
-                              ? const Color(
-                                  0xFFD4A64A,
-                                )
-                              : Colors
-                                  .transparent,
-                          borderRadius:
-                              BorderRadius
-                                  .circular(
-                            12,
-                          ),
+                              ? const Color(0xFFD4A64A)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(
                           child: Text(
                             "Female",
-                            style:
-                                TextStyle(
-                              color: !male
-                                  ? Colors
-                                      .black
-                                  : Colors
-                                      .white70,
-                              fontWeight:
-                                  FontWeight
-                                      .bold,
+                            style: TextStyle(
+                              color: !male ? Colors.black : Colors.white70,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -176,19 +126,14 @@ class _AiClothingPanelState
             Expanded(
               child: GridView.builder(
                 itemCount: items.length,
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   childAspectRatio: .78,
                 ),
-                itemBuilder: (
-                  context,
-                  index,
-                ) {
-                  final active =
-                      selected == index;
+                itemBuilder: (context, index) {
+                  final active = selected == index;
 
                   return GestureDetector(
                     onTap: () {
@@ -197,24 +142,13 @@ class _AiClothingPanelState
                       });
                     },
                     child: Container(
-                      decoration:
-                          BoxDecoration(
-                        color:
-                            const Color(
-                          0xFF1E293B,
-                        ),
-                        borderRadius:
-                            BorderRadius
-                                .circular(
-                          14,
-                        ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1E293B),
+                        borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: active
-                              ? const Color(
-                                  0xFFD4A64A,
-                                )
-                              : Colors
-                                  .transparent,
+                              ? const Color(0xFFD4A64A)
+                              : Colors.transparent,
                           width: 2,
                         ),
                       ),
@@ -222,50 +156,27 @@ class _AiClothingPanelState
                         children: [
                           Expanded(
                             child: Container(
-                              margin:
-                                  const EdgeInsets
-                                      .all(
-                                6,
+                              margin: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF334155),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              decoration:
-                                  BoxDecoration(
-                                color:
-                                    const Color(
-                                  0xFF334155,
-                                ),
-                                borderRadius:
-                                    BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              child:
-                                  const Center(
+                              child: const Center(
                                 child: Icon(
-                                  Icons
-                                      .person,
-                                  size:
-                                      40,
-                                  color:
-                                      Colors.white54,
+                                  Icons.person,
+                                  size: 40,
+                                  color: Colors.white54,
                                 ),
                               ),
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets
-                                    .all(
-                              6,
-                            ),
+                            padding: const EdgeInsets.all(6),
                             child: Text(
                               items[index],
-                              style:
-                                  const TextStyle(
-                                color:
-                                    Colors
-                                        .white,
-                                fontSize:
-                                    11,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
                               ),
                             ),
                           ),

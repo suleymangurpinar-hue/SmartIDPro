@@ -1,6 +1,5 @@
 class FileValidationService {
-  static const allowedExtensions =
-      [
+  static const allowedExtensions = [
     '.jpg',
     '.jpeg',
     '.png',
@@ -11,14 +10,10 @@ class FileValidationService {
     '.cr3',
   ];
 
-  static bool validate(
-    String path,
-  ) {
-    final lower =
-        path.toLowerCase();
+  static bool validate(String path) {
+    final lower = path.toLowerCase();
 
-    for (final ext
-        in allowedExtensions) {
+    for (final ext in allowedExtensions) {
       if (lower.endsWith(ext)) {
         return true;
       }

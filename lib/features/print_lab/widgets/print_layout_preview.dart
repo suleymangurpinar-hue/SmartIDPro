@@ -36,20 +36,13 @@ class PrintLayoutPreview extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xFF111111),
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                    color: const Color(0xFF6B5215),
-                    width: .8,
-                  ),
+                  border: Border.all(color: const Color(0xFF6B5215), width: .8),
                 ),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: _sheetPreview(),
-                    ),
+                    Expanded(child: _sheetPreview()),
                     const SizedBox(width: 18),
-                    Expanded(
-                      child: _sheetPreview(),
-                    ),
+                    Expanded(child: _sheetPreview()),
                   ],
                 ),
               ),
@@ -79,16 +72,13 @@ class PrintLayoutPreview extends StatelessWidget {
                   backgroundColor: const Color(0xFFD4AF37),
                   foregroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 onPressed: () {},
                 child: const Text(
                   "BASKI OLUŞTUR",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -106,8 +96,7 @@ class PrintLayoutPreview extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: GridView.count(
-        physics:
-            const NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
@@ -116,8 +105,7 @@ class PrintLayoutPreview extends StatelessWidget {
           (index) => Container(
             decoration: BoxDecoration(
               color: Colors.grey.shade400,
-              borderRadius:
-                  BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(4),
             ),
           ),
         ),
@@ -132,18 +120,10 @@ class PrintLayoutPreview extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF6B5215),
-          width: .7,
-        ),
+        border: Border.all(color: const Color(0xFF6B5215), width: .7),
       ),
       child: Center(
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        child: Text(title, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

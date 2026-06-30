@@ -2,35 +2,24 @@ import 'package:flutter/material.dart';
 
 import '../models/face_analysis_model.dart';
 
-class FaceAnalysisProvider
-    extends ChangeNotifier {
-  FaceAnalysisModel _result =
-      FaceAnalysisModel.demo();
+class FaceAnalysisProvider extends ChangeNotifier {
+  FaceAnalysisModel _result = FaceAnalysisModel.demo();
 
   bool _isAnalyzing = false;
 
   bool _faceDetected = false;
 
-  FaceAnalysisModel get result =>
-      _result;
+  FaceAnalysisModel get result => _result;
 
-  bool get isAnalyzing =>
-      _isAnalyzing;
+  bool get isAnalyzing => _isAnalyzing;
 
-  bool get faceDetected =>
-      _faceDetected;
+  bool get faceDetected => _faceDetected;
 
-  Future<void> analyzePhoto(
-    String imagePath,
-  ) async {
+  Future<void> analyzePhoto(String imagePath) async {
     _isAnalyzing = true;
     notifyListeners();
 
-    await Future.delayed(
-      const Duration(
-        seconds: 2,
-      ),
-    );
+    await Future.delayed(const Duration(seconds: 2));
 
     _faceDetected = true;
 
@@ -53,8 +42,7 @@ class FaceAnalysisProvider
 
     _isAnalyzing = false;
 
-    _result =
-        FaceAnalysisModel.demo();
+    _result = FaceAnalysisModel.demo();
 
     notifyListeners();
   }

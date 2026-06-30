@@ -6,8 +6,7 @@ import '../engine/face_analysis_result.dart';
 class ComplianceProvider extends ChangeNotifier {
   final BiometricEngine _engine = BiometricEngine();
 
-  FaceAnalysisResult _result =
-      FaceAnalysisResult.empty();
+  FaceAnalysisResult _result = FaceAnalysisResult.empty();
 
   bool _loading = false;
 
@@ -15,22 +14,18 @@ class ComplianceProvider extends ChangeNotifier {
 
   bool get loading => _loading;
 
-  Future<void> analyzePhoto(
-    String imagePath,
-  ) async {
+  Future<void> analyzePhoto(String imagePath) async {
     _loading = true;
     notifyListeners();
 
-    _result =
-        await _engine.analyze(imagePath);
+    _result = await _engine.analyze(imagePath);
 
     _loading = false;
     notifyListeners();
   }
 
   void clear() {
-    _result =
-        FaceAnalysisResult.empty();
+    _result = FaceAnalysisResult.empty();
 
     notifyListeners();
   }

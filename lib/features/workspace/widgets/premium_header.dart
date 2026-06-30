@@ -12,10 +12,7 @@ class PremiumHeader extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF0A0A0A),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(
-          color: const Color(0xFF8D6A20),
-          width: 0.6,
-        ),
+        border: Border.all(color: const Color(0xFF8D6A20), width: 0.6),
       ),
       child: Row(
         children: [
@@ -33,10 +30,7 @@ class PremiumHeader extends StatelessWidget {
 
           const Text(
             "ENTERPRISE",
-            style: TextStyle(
-              color: Colors.white54,
-              letterSpacing: 3,
-            ),
+            style: TextStyle(color: Colors.white54, letterSpacing: 3),
           ),
 
           const Spacer(),
@@ -52,17 +46,11 @@ class PremiumHeader extends StatelessWidget {
   Widget _action(String title) {
     return Container(
       margin: const EdgeInsets.only(left: 12),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 18,
-        vertical: 10,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       decoration: BoxDecoration(
         color: const Color(0xFF121212),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: const Color(0xFF8D6A20),
-          width: 0.5,
-        ),
+        border: Border.all(color: const Color(0xFF8D6A20), width: 0.5),
       ),
       child: Text(title),
     );

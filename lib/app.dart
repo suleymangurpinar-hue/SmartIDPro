@@ -11,10 +11,10 @@ import 'features/compliance/provider/compliance_provider.dart';
 import 'features/customer_archive/providers/customer_archive_provider.dart';
 import 'features/embassy_database/providers/embassy_database_provider.dart';
 import 'features/enterprise/providers/process_queue_provider.dart';
-import 'features/enterprise/providers/workspace_provider.dart';
 import 'features/enterprise/providers/face_analysis_provider.dart';
 import 'features/enterprise/providers/document_preset_provider.dart';
 import 'features/enterprise/providers/job_history_provider.dart';
+import 'features/workspace/controllers/workspace_controller.dart';
 import 'features/raw_studio/providers/raw_studio_provider.dart';
 import 'features/reports/providers/reports_provider.dart';
 import 'features/settings/providers/settings_provider.dart';
@@ -29,7 +29,9 @@ class SmartIdProApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => WorkspaceProvider()),
+        ChangeNotifierProvider<WorkspaceController>(
+          create: (_) => WorkspaceController(),
+        ),
         ChangeNotifierProvider(create: (_) => ProcessQueueProvider()),
         ChangeNotifierProvider(create: (_) => ComplianceProvider()),
         ChangeNotifierProvider(create: (_) => FaceAnalysisProvider()),

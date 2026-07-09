@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../ai_background/controllers/ai_background_controller.dart';
 import '../../ai_background/widgets/background_grid.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 
 class BackgroundPanel extends StatefulWidget {
   const BackgroundPanel({super.key});
@@ -16,7 +18,9 @@ class _BackgroundPanelState extends State<BackgroundPanel> {
   @override
   void initState() {
     super.initState();
-    controller = AiBackgroundController();
+    controller = AiBackgroundController(
+      workspace: context.read<WorkspaceController>(),
+    );
   }
 
   @override

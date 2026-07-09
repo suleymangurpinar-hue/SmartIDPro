@@ -6,13 +6,18 @@ import '../models/clothing_item.dart';
 import '../models/clothing_result.dart';
 import '../services/ai_clothing_service.dart';
 import '../services/mock_ai_clothing_service.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 
 class AiClothingController extends ChangeNotifier {
-  AiClothingController({AiClothingService? service})
-    : _service = service ?? MockAiClothingService() {
+  AiClothingController({
+    required WorkspaceController workspace,
+    AiClothingService? service,
+  }) : _workspace = workspace,
+       _service = service ?? MockAiClothingService() {
     _selectedClothing = clothingItems.isNotEmpty ? clothingItems.first : null;
   }
 
+  final WorkspaceController _workspace;
   final AiClothingService _service;
 
   String _currentGender = 'male';
@@ -24,6 +29,7 @@ class AiClothingController extends ChangeNotifier {
   ClothingCategory get currentCategory => _currentCategory;
   ClothingItem? get selectedClothing => _selectedClothing;
   ClothingStatus get engineStatus => _engineStatus;
+  String? get activeImagePath => _workspace.imagePath;
 
   List<ClothingItem> get clothingItems {
     return ClothingLibrary.byGender(_currentGender);

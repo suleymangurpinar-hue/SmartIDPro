@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../enterprise/providers/workspace_provider.dart';
 import '../providers/print_studio_provider.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 
 class PreviewCanvas extends StatelessWidget {
   const PreviewCanvas({super.key});
@@ -14,7 +14,7 @@ class PreviewCanvas extends StatelessWidget {
   Widget build(BuildContext context) {
     final print = context.watch<PrintStudioProvider>();
 
-    final workspace = context.watch<WorkspaceProvider>();
+    final workspace = context.watch<WorkspaceController>();
 
     final imagePath = workspace.imagePath;
     final layout = print.photoLayout;

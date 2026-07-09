@@ -6,15 +6,20 @@ import '../models/background_item.dart';
 import '../models/background_result.dart';
 import '../services/ai_background_service.dart';
 import '../services/mock_ai_background_service.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 
 class AiBackgroundController extends ChangeNotifier {
-  AiBackgroundController({AiBackgroundService? service})
-    : _service = service ?? MockAiBackgroundService() {
+  AiBackgroundController({
+    required WorkspaceController workspace,
+    AiBackgroundService? service,
+  }) : _workspace = workspace,
+       _service = service ?? MockAiBackgroundService() {
     _selectedBackground = backgroundItems.isNotEmpty
         ? backgroundItems.first
         : null;
   }
 
+  final WorkspaceController _workspace;
   final AiBackgroundService _service;
 
   BackgroundCategory _currentCategory = BackgroundCategory.solid;
@@ -24,6 +29,7 @@ class AiBackgroundController extends ChangeNotifier {
   BackgroundCategory get currentCategory => _currentCategory;
   BackgroundItem? get selectedBackground => _selectedBackground;
   BackgroundStatus get engineStatus => _engineStatus;
+  String? get activeImagePath => _workspace.imagePath;
 
   List<BackgroundItem> get backgroundItems {
     return BackgroundLibrary.items;

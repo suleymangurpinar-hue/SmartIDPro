@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../ai_clothing/controllers/ai_clothing_controller.dart';
 import '../../ai_clothing/widgets/clothing_category_bar.dart';
 import '../../ai_clothing/widgets/clothing_grid.dart';
 import '../../ai_clothing/widgets/engine_status_chip.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 
 class AiClothingPanel extends StatefulWidget {
   const AiClothingPanel({super.key});
@@ -18,7 +20,9 @@ class _AiClothingPanelState extends State<AiClothingPanel> {
   @override
   void initState() {
     super.initState();
-    controller = AiClothingController();
+    controller = AiClothingController(
+      workspace: context.read<WorkspaceController>(),
+    );
   }
 
   @override

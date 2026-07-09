@@ -5,25 +5,16 @@ import '../../../l10n/app_localizations.dart';
 import '../../compliance/services/face_detector_service.dart';
 import '../providers/document_preset_provider.dart';
 import '../providers/process_queue_provider.dart';
-import '../providers/workspace_provider.dart';
+import '../../workspace/controllers/workspace_controller.dart';
 import '../services/file_name_service.dart';
 import '../services/photo_import_service.dart';
 
 class ImportPhotoButton extends StatelessWidget {
-  const ImportPhotoButton({
-    super.key,
-  });
+  const ImportPhotoButton({super.key});
 
-  Future<void> _autoCrop(
-    BuildContext context,
-    String imagePath,
-  ) async {
+  Future<void> _autoCrop(BuildContext context, String imagePath) async {
     try {
-      final face =
-          await FaceDetectorService()
-              .detectFace(
-        imagePath,
-      );
+      final face = await FaceDetectorService().detectFace(imagePath);
 
       debugPrint(
         'FACE: '
@@ -41,21 +32,17 @@ class ImportPhotoButton extends StatelessWidget {
         return;
       }
 
-      final preset =
-          context.read<DocumentPresetProvider>();
+      final preset = context.read<DocumentPresetProvider>();
 
-      final workspace =
-          context.read<WorkspaceProvider>();
+      final workspace = context.read<WorkspaceController>();
 
       workspace.calculateAutoCrop(
         faceX: face.x,
         faceY: face.y,
         faceWidth: face.width,
         faceHeight: face.height,
-        targetHeadRatio:
-            preset.targetHeadRatio,
-        targetEyeRatio:
-            preset.targetEyeRatio,
+        targetHeadRatio: preset.targetHeadRatio,
+        targetEyeRatio: preset.targetEyeRatio,
       );
 
       debugPrint(
@@ -64,30 +51,19 @@ class ImportPhotoButton extends StatelessWidget {
         'offset:${workspace.offset}',
       );
     } catch (e) {
-      debugPrint(
-        'AUTO CROP ERROR: $e',
-      );
+      debugPrint('AUTO CROP ERROR: $e');
     }
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
-    final l10n =
-        AppLocalizations.of(context)!;
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
 
     return ElevatedButton.icon(
-      icon: const Icon(
-        Icons.add_photo_alternate,
-      ),
-      label: Text(
-        l10n.importPhoto,
-      ),
+      icon: const Icon(Icons.add_photo_alternate),
+      label: Text(l10n.importPhoto),
       onPressed: () async {
-        final path =
-            await PhotoImportService
-                .pickPhoto();
+        final path = await PhotoImportService.pickPhoto();
 
         if (path == null) {
           return;
@@ -97,30 +73,22 @@ class ImportPhotoButton extends StatelessWidget {
           return;
         }
 
-        final workspace =
-            context.read<
-                WorkspaceProvider>();
+        final workspace = context.read<WorkspaceController>();
 
         workspace.clear();
-        workspace.setImage(path);
-
-        await _autoCrop(
-          context,
-          path,
-        );
+        await workspace.loadImage(path);
 
         if (!context.mounted) {
           return;
         }
 
-        context
-            .read<
-                ProcessQueueProvider>()
-            .add(
-              FileNameService.extract(
-                path,
-              ),
-            );
+        await _autoCrop(context, path);
+
+        if (!context.mounted) {
+          return;
+        }
+
+        context.read<ProcessQueueProvider>().add(FileNameService.extract(path));
       },
     );
   }

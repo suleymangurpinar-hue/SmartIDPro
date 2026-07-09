@@ -1,0 +1,37 @@
+lib/features/enterprise/widgets/template_library_panel.dartFuture<void> _applyPreset(BuildContext context, DocumentPreset preset) async {
+  final presetProvider = context.read<DocumentPresetProvider>();
+
+  presetProvider.changePreset(preset);
+
+  final print = context.read<PrintStudioProvider>();
+
+  print.applyPreset(
+    paperSize: preset.paper,
+    photoLayout: preset.layout.toString(),
+  );
+
+  print.setPhotoSize(preset.widthMm, preset.heightMm);
+
+  final workspace = context.read<WorkspaceProvider>();
+
+  final imagePath = workspace.imagePath;
+
+  if (imagePath == null) {
+    return;
+  }
+
+  final face = await FaceDetectorService().detectFace(imagePath);
+
+  if (!face.faceFound) {
+    return;
+  }
+
+  workspace.calculateAutoCrop(
+    faceX: face.x,
+    faceY: face.y,
+    faceWidth: face.width,
+    faceHeight: face.height,
+    targetHeadRatio: presetProvider.targetHeadRatio,
+    targetEyeRatio: presetProvider.targetEyeRatio,
+  );
+}

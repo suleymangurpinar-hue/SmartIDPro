@@ -3,12 +3,35 @@ import FlutterMacOS
 
 class MainFlutterWindow: NSWindow {
   override func awakeFromNib() {
-    let flutterViewController = FlutterViewController()
-    let windowFrame = self.frame
-    self.contentViewController = flutterViewController
-    self.setFrame(windowFrame, display: true)
+    let flutterViewController =
+      FlutterViewController()
 
-    RegisterGeneratedPlugins(registry: flutterViewController)
+    self.contentViewController =
+      flutterViewController
+
+    self.setFrame(
+      NSRect(
+        x: 0,
+        y: 0,
+        width: 1800,
+        height: 1100
+      ),
+      display: true,
+    )
+
+    self.minSize =
+      NSSize(
+        width: 1650,
+        height: 980
+      )
+
+    self.titleVisibility = .hidden
+    self.titlebarAppearsTransparent = true
+
+    RegisterGeneratedPlugins(
+      registry:
+        flutterViewController
+    )
 
     super.awakeFromNib()
   }

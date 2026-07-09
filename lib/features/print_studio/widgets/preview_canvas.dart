@@ -1,188 +1,193 @@
+import 'dart:math' as math;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../enterprise/providers/workspace_provider.dart';
-import '../services/print_preview_service.dart';
+import '../providers/print_studio_provider.dart';
 
 class PreviewCanvas extends StatelessWidget {
-  final int count;
-
-  const PreviewCanvas({
-    super.key,
-    required this.count,
-  });
+  const PreviewCanvas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final workspace =
-        context.watch<WorkspaceProvider>();
+    final print = context.watch<PrintStudioProvider>();
 
-    final imagePath =
-        workspace.imagePath;
+    final workspace = context.watch<WorkspaceProvider>();
 
-    final cross =
-        PrintPreviewService
-            .calculateCrossCount(
-      count,
-    );
+    final imagePath = workspace.imagePath;
+    final layout = print.photoLayout;
 
-    return AspectRatio(
-      aspectRatio: 1.5,
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFFF8F8F8),
-          borderRadius:
-              BorderRadius.circular(14),
-          border: Border.all(
-            color:
-                Colors.grey.shade400,
-          ),
-          boxShadow: const [
-            BoxShadow(
-              color:
-                  Color(0x22000000),
-              blurRadius: 12,
-              offset: Offset(0, 4),
+    if (imagePath == null) {
+      return _PreviewFrame(
+        child: _PaperSurface(
+          paperWidthMm: layout.paperWidthMm,
+          paperHeightMm: layout.paperHeightMm,
+          child: const Center(
+            child: Text(
+              'Fotoğraf Seçilmedi',
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ],
-        ),
-        child: Padding(
-          padding:
-              const EdgeInsets.all(
-            14,
           ),
-          child: GridView.count(
-            physics:
-                const NeverScrollableScrollPhysics(),
-            crossAxisCount:
-                cross,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            children: List.generate(
-              count,
-              (index) {
-                return Container(
-                  decoration:
-                      BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(
-                      6,
-                    ),
-                    border:
-                        Border.all(
-                      color:
-                          Colors
-                              .grey
-                              .shade400,
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child:
-                            imagePath ==
-                                    null
-                                ? Container(
-                                    color:
-                                        Colors
-                                            .grey
-                                            .shade200,
-                                    child:
-                                        const Icon(
-                                      Icons
-                                          .person,
-                                      color:
-                                          Colors
-                                              .grey,
-                                      size:
-                                          34,
-                                    ),
-                                  )
-                                : ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.circular(
-                                      5,
-                                    ),
-                                    child:
-                                        Image.file(
-                                      File(
-                                        imagePath,
-                                      ),
-                                      fit:
-                                          BoxFit
-                                              .cover,
-                                    ),
-                                  ),
-                      ),
+        ),
+      );
+    }
 
-                      Positioned.fill(
-                        child:
-                            IgnorePointer(
-                          child:
-                              CustomPaint(
-                            painter:
-                                _CutGuidePainter(),
-                          ),
+    return _PreviewFrame(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final scale = math.min(
+            constraints.maxWidth / layout.paperWidthMm,
+            constraints.maxHeight / layout.paperHeightMm,
+          );
+          final paperWidth = layout.paperWidthMm * scale;
+          final paperHeight = layout.paperHeightMm * scale;
+
+          return Center(
+            child: _PaperSurface(
+              paperWidthMm: layout.paperWidthMm,
+              paperHeightMm: layout.paperHeightMm,
+              child: SizedBox(
+                width: paperWidth,
+                height: paperHeight,
+                child: Stack(
+                  children: [
+                    for (final placement in layout.placements)
+                      Positioned(
+                        left: placement.xMm * scale,
+                        top: placement.yMm * scale,
+                        width: placement.widthMm * scale,
+                        height: placement.heightMm * scale,
+                        child: _PhotoPrint(
+                          imagePath: imagePath,
+                          rotatePhoto: placement.rotatePhoto,
+                          photoScale: workspace.scale,
+                          photoOffset: workspace.offset,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-class _CutGuidePainter
-    extends CustomPainter {
+class _PreviewFrame extends StatelessWidget {
+  const _PreviewFrame({required this.child});
+
+  final Widget child;
+
   @override
-  void paint(
-    Canvas canvas,
-    Size size,
-  ) {
-    final paint = Paint()
-      ..color =
-          const Color(
-            0x22000000,
-          )
-      ..strokeWidth = 1;
-
-    canvas.drawLine(
-      Offset(
-        size.width / 2,
-        0,
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color(0xFF050B16),
+        borderRadius: BorderRadius.circular(14),
       ),
-      Offset(
-        size.width / 2,
-        size.height,
-      ),
-      paint,
-    );
-
-    canvas.drawLine(
-      Offset(
-        0,
-        size.height / 2,
-      ),
-      Offset(
-        size.width,
-        size.height / 2,
-      ),
-      paint,
+      padding: const EdgeInsets.all(12),
+      child: child,
     );
   }
+}
+
+class _PaperSurface extends StatelessWidget {
+  const _PaperSurface({
+    required this.paperWidthMm,
+    required this.paperHeightMm,
+    required this.child,
+  });
+
+  final double paperWidthMm;
+  final double paperHeightMm;
+  final Widget child;
 
   @override
-  bool shouldRepaint(
-    covariant CustomPainter oldDelegate,
-  ) {
-    return false;
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: paperWidthMm / paperHeightMm,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, .28),
+              blurRadius: 18,
+              offset: Offset(0, 10),
+            ),
+          ],
+          border: Border.all(color: Colors.black12, width: .5),
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+
+class _PhotoPrint extends StatelessWidget {
+  const _PhotoPrint({
+    required this.imagePath,
+    required this.rotatePhoto,
+    required this.photoScale,
+    required this.photoOffset,
+  });
+
+  final String imagePath;
+  final bool rotatePhoto;
+  final double photoScale;
+  final Offset photoOffset;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.black, width: .5),
+      ),
+      child: ClipRect(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final image = Transform.translate(
+              offset: photoOffset,
+              child: Transform.scale(
+                scale: photoScale,
+                alignment: Alignment.center,
+                child: Image.file(
+                  File(imagePath),
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+            );
+
+            if (!rotatePhoto) {
+              return SizedBox.expand(child: image);
+            }
+
+            return Center(
+              child: Transform.rotate(
+                angle: math.pi / 2,
+                child: SizedBox(
+                  width: constraints.maxHeight,
+                  height: constraints.maxWidth,
+                  child: image,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

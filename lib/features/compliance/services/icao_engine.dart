@@ -21,19 +21,27 @@ class IcaoEngine {
     double minEye = 28,
     double maxEye = 35,
   }) {
-    final headPercent = faceHeight * 100;
-    final eyePercent = eyeY * 100;
+    final headPercent =
+        faceHeight * 100;
 
-    final headOk =
-        headPercent >= minHead &&
-        headPercent <= maxHead;
+    final eyePercent =
+        eyeY * 100;
 
-    final eyeOk =
-        eyePercent >= minEye &&
-        eyePercent <= maxEye;
+    final headDiff =
+        (75 - headPercent).abs();
 
-    final headScore = headOk ? 100.0 : 65.0;
-    final eyeScore = eyeOk ? 100.0 : 65.0;
+    final eyeDiff =
+        (31.5 - eyePercent).abs();
+
+    final headScore =
+        (100 - (headDiff * 4))
+            .clamp(0, 100)
+            .toDouble();
+
+    final eyeScore =
+        (100 - (eyeDiff * 5))
+            .clamp(0, 100)
+            .toDouble();
 
     final overall =
         (headScore + eyeScore) / 2;
@@ -42,7 +50,7 @@ class IcaoEngine {
       eyeScore: eyeScore,
       headScore: headScore,
       overallScore: overall,
-      icaoReady: overall >= 90,
+      icaoReady: overall >= 85,
     );
   }
 }

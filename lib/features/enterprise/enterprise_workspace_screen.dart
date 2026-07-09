@@ -20,170 +20,93 @@ import 'widgets/biometric_status_bar.dart';
 import 'widgets/ai_scan_workspace.dart';
 import 'widgets/ai_tools_panel.dart';
 import 'widgets/template_library_panel.dart';
-import 'widgets/process_queue_panel.dart';
 import 'widgets/print_settings_panel.dart';
+import 'widgets/template_manager_panel.dart';
+import 'widgets/recent_images_panel.dart';
 
-class EnterpriseWorkspaceScreen
-    extends StatefulWidget {
-  const EnterpriseWorkspaceScreen({
-    super.key,
-  });
+class EnterpriseWorkspaceScreen extends StatefulWidget {
+  const EnterpriseWorkspaceScreen({super.key});
 
   @override
-  State<EnterpriseWorkspaceScreen>
-      createState() =>
-          _EnterpriseWorkspaceScreenState();
+  State<EnterpriseWorkspaceScreen> createState() =>
+      _EnterpriseWorkspaceScreenState();
 }
 
-class _EnterpriseWorkspaceScreenState
-    extends State<
-        EnterpriseWorkspaceScreen> {
-  EnterpriseWorkspaceModule
-      _selectedModule =
-      EnterpriseWorkspaceModule.scan;
+class _EnterpriseWorkspaceScreenState extends State<EnterpriseWorkspaceScreen> {
+  EnterpriseWorkspaceModule _selectedModule = EnterpriseWorkspaceModule.scan;
 
   @override
   Widget build(BuildContext context) {
-    final imagePath =
-        context
-            .watch<WorkspaceProvider>()
-            .imagePath;
+    final imagePath = context.watch<WorkspaceProvider>().imagePath;
 
-    final authUser =
-        context
-            .watch<AuthProvider>()
-            .user;
+    final authUser = context.watch<AuthProvider>().user;
 
     return Scaffold(
-      body: Container(
-        decoration:
-            const BoxDecoration(
-          gradient: LinearGradient(
-            begin:
-                Alignment.topLeft,
-            end:
-                Alignment.bottomRight,
-            colors: [
-              Color(0xFF04070D),
-              Color(0xFF0B1220),
-              Color(0xFF111827),
+      backgroundColor: const Color(0xFF05070D),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              EnterpriseSidebar(
+                selected: _selectedModule,
+                onSelected: (module) {
+                  setState(() {
+                    _selectedModule = module;
+                  });
+                },
+              ),
+              const SizedBox(width: 18),
+              Expanded(
+                child: Column(
+                  children: [
+                    EnterpriseTopBar(
+                      title: _selectedModule.topBarTitle,
+                      score: _selectedModule == EnterpriseWorkspaceModule.scan
+                          ? '98%'
+                          : null,
+                      showImportButton:
+                          _selectedModule == EnterpriseWorkspaceModule.scan ||
+                          _selectedModule ==
+                              EnterpriseWorkspaceModule.rawStudio ||
+                          _selectedModule ==
+                              EnterpriseWorkspaceModule.batchProcessing,
+                      statusLabels: _selectedModule.statusLabels,
+                      userLabel: authUser?.displayName ?? 'ÇIKIŞ YAPILDI',
+                    ),
+                    const SizedBox(height: 14),
+                    Expanded(child: _buildModuleBody(imagePath)),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding:
-                const EdgeInsets.all(
-              18,
-            ),
-            child: Row(
-              children: [
-                EnterpriseSidebar(
-                  selected:
-                      _selectedModule,
-                  onSelected:
-                      (module) {
-                    setState(() {
-                      _selectedModule =
-                          module;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 18,
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      EnterpriseTopBar(
-                        title:
-                            _selectedModule
-                                .topBarTitle,
-                        score:
-                            _selectedModule ==
-                                    EnterpriseWorkspaceModule
-                                        .scan
-                                ? '98%'
-                                : null,
-                        showImportButton:
-                            _selectedModule ==
-                                    EnterpriseWorkspaceModule
-                                        .scan ||
-                                _selectedModule ==
-                                    EnterpriseWorkspaceModule
-                                        .rawStudio ||
-                                _selectedModule ==
-                                    EnterpriseWorkspaceModule
-                                        .batchProcessing,
-                        statusLabels:
-                            _selectedModule
-                                .statusLabels,
-                        userLabel:
-                            authUser
-                                    ?.displayName ??
-                                'SIGNED OUT',
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Expanded(
-                        child:
-                            _buildModuleBody(
-                          imagePath,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildModuleBody(
-    String? imagePath,
-  ) {
-    return switch (
-        _selectedModule) {
-      EnterpriseWorkspaceModule
-              .scan =>
-          _ScanWorkspaceBody(
-            imagePath:
-                imagePath,
-          ),
-      EnterpriseWorkspaceModule
-              .embassyDatabase =>
-          const EmbassyDatabaseScreen(),
-      EnterpriseWorkspaceModule
-              .customerArchive =>
-          const CustomerArchiveScreen(),
-      EnterpriseWorkspaceModule
-              .rawStudio =>
-          const RawStudioScreen(),
-      EnterpriseWorkspaceModule
-              .batchProcessing =>
-          const BatchProcessingScreen(),
-      EnterpriseWorkspaceModule
-              .reports =>
-          const ReportsScreen(),
-      EnterpriseWorkspaceModule
-              .settings =>
-          const SettingsScreen(),
-      EnterpriseWorkspaceModule
-              .authentication =>
-          const AuthenticationScreen(),
+  Widget _buildModuleBody(String? imagePath) {
+    return switch (_selectedModule) {
+      EnterpriseWorkspaceModule.scan => _ScanWorkspaceBody(
+        imagePath: imagePath,
+      ),
+      EnterpriseWorkspaceModule.embassyDatabase =>
+        const EmbassyDatabaseScreen(),
+      EnterpriseWorkspaceModule.customerArchive =>
+        const CustomerArchiveScreen(),
+      EnterpriseWorkspaceModule.rawStudio => const RawStudioScreen(),
+      EnterpriseWorkspaceModule.batchProcessing =>
+        const BatchProcessingScreen(),
+      EnterpriseWorkspaceModule.reports => const ReportsScreen(),
+      EnterpriseWorkspaceModule.settings => const SettingsScreen(),
+      EnterpriseWorkspaceModule.authentication => const AuthenticationScreen(),
     };
   }
 }
 
-class _ScanWorkspaceBody
-    extends StatelessWidget {
-  const _ScanWorkspaceBody({
-    required this.imagePath,
-  });
+class _ScanWorkspaceBody extends StatelessWidget {
+  const _ScanWorkspaceBody({required this.imagePath});
 
   final String? imagePath;
 
@@ -192,66 +115,47 @@ class _ScanWorkspaceBody
     return Column(
       children: [
         const BiometricStatusBar(),
-        const SizedBox(
-          height: 12,
-        ),
+        const SizedBox(height: 12),
+
         Expanded(
-          child: Row(
+          child: Column(
             children: [
               Expanded(
-                flex: 9,
-                child:
-                    AiScanWorkspace(
-                  imagePath:
-                      imagePath,
+                child: Row(
+                  children: [
+                    Expanded(child: AiScanWorkspace(imagePath: imagePath)),
+                    const SizedBox(width: 14),
+                    const SizedBox(width: 320, child: AiToolsPanel()),
+                  ],
                 ),
               ),
-              const SizedBox(
-                width: 18,
-              ),
-              const Expanded(
-                flex: 3,
-                child:
-                    AiToolsPanel(),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 18,
-        ),
-        SizedBox(
-          height: 280,
-          child: Row(
-            children: [
-              const Expanded(
-                flex: 4,
-                child:
-                    TemplateLibraryPanel(),
-              ),
-              const SizedBox(
-                width: 18,
-              ),
-              const Expanded(
-                flex: 2,
-                child:
-                    ProcessQueuePanel(),
-              ),
-              const SizedBox(
-                width: 18,
-              ),
-              const Expanded(
-                flex: 4,
-                child:
-                    PrintStudioPanel(),
-              ),
-              const SizedBox(
-                width: 18,
-              ),
-              const Expanded(
-                flex: 2,
-                child:
-                    PrintSettingsPanel(),
+
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 245,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(width: 250, child: TemplateLibraryPanel()),
+
+                    const SizedBox(width: 12),
+
+                    const SizedBox(width: 220, child: TemplateManagerPanel()),
+
+                    const SizedBox(width: 12),
+
+                    const SizedBox(width: 230, child: RecentImagesPanel()),
+
+                    const SizedBox(width: 12),
+
+                    const Expanded(child: PrintStudioPanel()),
+
+                    const SizedBox(width: 12),
+
+                    const SizedBox(width: 220, child: PrintSettingsPanel()),
+                  ],
+                ),
               ),
             ],
           ),

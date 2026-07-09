@@ -1,6 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../enterprise/providers/workspace_provider.dart';
 import '../widgets/import_dropzone.dart';
 
 class ImportScreen extends StatefulWidget {
@@ -32,6 +34,14 @@ class _ImportScreenState extends State<ImportScreen> {
     );
 
     if (result == null) return;
+
+    final path = result.files.single.path;
+
+    if (path == null) return;
+
+    if (!mounted) return;
+
+    context.read<WorkspaceProvider>().setImage(path);
 
     setState(() {
       selectedFile = result.files.single.name;

@@ -19,14 +19,21 @@ class FaceLandmarkResult {
 }
 
 class FaceLandmarkService {
-  Future<FaceLandmarkResult> detectLandmarks(String imagePath) async {
-    await Future.delayed(const Duration(milliseconds: 200));
+  Future<FaceLandmarkResult>
+      detectLandmarks(
+    String imagePath,
+  ) async {
+    await Future.delayed(
+      const Duration(
+        milliseconds: 200,
+      ),
+    );
 
     return const FaceLandmarkResult(
       leftEyeX: 0.43,
-      leftEyeY: 0.36,
+      leftEyeY: 0.31,
       rightEyeX: 0.57,
-      rightEyeY: 0.36,
+      rightEyeY: 0.31,
       noseX: 0.50,
       noseY: 0.48,
     );

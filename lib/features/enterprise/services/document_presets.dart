@@ -2,16 +2,12 @@ class DocumentPreset {
   final String id;
   final String name;
   final String country;
-
   final double widthMm;
   final double heightMm;
-
   final double headMinPercent;
   final double headMaxPercent;
-
   final double eyeMinPercent;
   final double eyeMaxPercent;
-
   final String paper;
   final int layout;
   final int dpi;
@@ -58,16 +54,22 @@ class DocumentPresets {
     kuwaitVisa,
   ];
 
+  // ICAO 70-80 yerine daha stabil ortalama
+  static const _headMin = 72.0;
+  static const _headMax = 76.0;
+  static const _eyeMin = 54.0;
+  static const _eyeMax = 58.0;
+
   static const turkeyBiometric = DocumentPreset(
     id: 'tr_biometric',
     name: 'Türkiye Biyometrik',
     country: 'TR',
     widthMm: 50,
     heightMm: 60,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 4,
     dpi: 300,
@@ -79,10 +81,10 @@ class DocumentPresets {
     country: 'TR',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -94,10 +96,10 @@ class DocumentPresets {
     country: 'TR',
     widthMm: 50,
     heightMm: 60,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 4,
     dpi: 300,
@@ -109,10 +111,10 @@ class DocumentPresets {
     country: 'TR',
     widthMm: 50,
     heightMm: 60,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 4,
     dpi: 300,
@@ -124,10 +126,10 @@ class DocumentPresets {
     country: 'TR',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -140,9 +142,9 @@ class DocumentPresets {
     widthMm: 35,
     heightMm: 45,
     headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMaxPercent: 74,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -154,10 +156,10 @@ class DocumentPresets {
     country: 'TR',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: _headMin,
+    headMaxPercent: _headMax,
+    eyeMinPercent: _eyeMin,
+    eyeMaxPercent: _eyeMax,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -169,29 +171,16 @@ class DocumentPresets {
     country: 'EU',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
   );
 
-  static const germanyVisa = DocumentPreset(
-    id: 'germany',
-    name: 'Germany Visa',
-    country: 'DE',
-    widthMm: 35,
-    heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
-    paper: '10x15',
-    layout: 8,
-    dpi: 300,
-  );
+  static const germanyVisa = schengenVisa;
 
   static const franceVisa = DocumentPreset(
     id: 'france',
@@ -199,10 +188,10 @@ class DocumentPresets {
     country: 'FR',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -214,10 +203,10 @@ class DocumentPresets {
     country: 'IT',
     widthMm: 35,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -229,29 +218,16 @@ class DocumentPresets {
     country: 'USA',
     widthMm: 51,
     heightMm: 51,
-    headMinPercent: 68,
-    headMaxPercent: 78,
-    eyeMinPercent: 30,
-    eyeMaxPercent: 40,
+    headMinPercent: 66,
+    headMaxPercent: 70,
+    eyeMinPercent: 52,
+    eyeMaxPercent: 56,
     paper: '10x15',
     layout: 4,
     dpi: 300,
   );
 
-  static const canadaVisa = DocumentPreset(
-    id: 'canada',
-    name: 'Canada Visa',
-    country: 'CA',
-    widthMm: 35,
-    heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
-    paper: '10x15',
-    layout: 8,
-    dpi: 300,
-  );
+  static const canadaVisa = schengenVisa;
 
   static const mexicoVisa = DocumentPreset(
     id: 'mexico',
@@ -259,10 +235,10 @@ class DocumentPresets {
     country: 'MX',
     widthMm: 31,
     heightMm: 39,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
@@ -274,10 +250,10 @@ class DocumentPresets {
     country: 'JP',
     widthMm: 45,
     heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 30,
-    eyeMaxPercent: 40,
+    headMinPercent: 68,
+    headMaxPercent: 72,
+    eyeMinPercent: 53,
+    eyeMaxPercent: 57,
     paper: '10x15',
     layout: 4,
     dpi: 300,
@@ -289,44 +265,17 @@ class DocumentPresets {
     country: 'CN',
     widthMm: 33,
     heightMm: 48,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 8,
     dpi: 300,
   );
 
-  static const koreaVisa = DocumentPreset(
-    id: 'korea',
-    name: 'Korea Visa',
-    country: 'KR',
-    widthMm: 35,
-    heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
-    paper: '10x15',
-    layout: 8,
-    dpi: 300,
-  );
-
-  static const singaporeVisa = DocumentPreset(
-    id: 'singapore',
-    name: 'Singapore Visa',
-    country: 'SG',
-    widthMm: 35,
-    heightMm: 45,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
-    paper: '10x15',
-    layout: 8,
-    dpi: 300,
-  );
+  static const koreaVisa = schengenVisa;
+  static const singaporeVisa = schengenVisa;
 
   static const dubaiVisa = DocumentPreset(
     id: 'dubai',
@@ -334,10 +283,10 @@ class DocumentPresets {
     country: 'AE',
     widthMm: 43,
     heightMm: 55,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 4,
     dpi: 300,
@@ -350,28 +299,15 @@ class DocumentPresets {
     widthMm: 40,
     heightMm: 60,
     headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMaxPercent: 74,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 4,
     dpi: 300,
   );
 
-  static const qatarVisa = DocumentPreset(
-    id: 'qatar',
-    name: 'Qatar Visa',
-    country: 'QA',
-    widthMm: 38,
-    heightMm: 48,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
-    paper: '10x15',
-    layout: 8,
-    dpi: 300,
-  );
+  static const qatarVisa = schengenVisa;
 
   static const kuwaitVisa = DocumentPreset(
     id: 'kuwait',
@@ -379,10 +315,10 @@ class DocumentPresets {
     country: 'KW',
     widthMm: 40,
     heightMm: 50,
-    headMinPercent: 70,
-    headMaxPercent: 80,
-    eyeMinPercent: 28,
-    eyeMaxPercent: 35,
+    headMinPercent: 72,
+    headMaxPercent: 76,
+    eyeMinPercent: 54,
+    eyeMaxPercent: 58,
     paper: '10x15',
     layout: 6,
     dpi: 300,

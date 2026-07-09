@@ -1,14 +1,21 @@
 Analyzing smart_id_pro...                                       
 
-  error • Target of URI doesn't exist: '../provider/document_preset_provider.dart' • lib/features/enterprise/widgets/document_preset_bar.dart:4:8 • uri_does_not_exist
-  error • The name 'DocumentPresetProvider' isn't a type, so it can't be used as a type argument • lib/features/enterprise/widgets/document_preset_bar.dart:16:9 • non_type_as_type_argument
-  error • The property 'selected' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/document_preset_bar.dart:30:30 • unchecked_use_of_nullable_value
-  error • The method 'changePreset' can't be unconditionally invoked because the receiver can be 'null' • lib/features/enterprise/widgets/document_preset_bar.dart:36:26 • unchecked_use_of_nullable_value
-   info • Unnecessary use of multiple underscores • lib/features/enterprise/widgets/face_mesh_hud.dart:39:20 • unnecessary_underscores
-   info • Unnecessary use of multiple underscores • lib/features/enterprise/widgets/icao_live_panel.dart:42:20 • unnecessary_underscores
-  error • Target of URI doesn't exist: '../provider/job_history_provider.dart' • lib/features/enterprise/widgets/recent_jobs_panel.dart:4:8 • uri_does_not_exist
-  error • The name 'JobHistoryProvider' isn't a type, so it can't be used as a type argument • lib/features/enterprise/widgets/recent_jobs_panel.dart:15:9 • non_type_as_type_argument
-  error • The property 'jobs' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/recent_jobs_panel.dart:61:34 • unchecked_use_of_nullable_value
-  error • The property 'jobs' can't be unconditionally accessed because the receiver can be 'null' • lib/features/enterprise/widgets/recent_jobs_panel.dart:70:32 • unchecked_use_of_nullable_value
-   info • Unnecessary use of multiple underscores • lib/features/workspace/widgets/scan_overlay.dart:30:20 • unnecessary_underscores
+  error • Target of URI doesn't exist: '../models/face_analysis_model.dart' • chatgpt_debug/face_analysis_provider.dart:3:8 • uri_does_not_exist
+  error • Undefined class 'FaceAnalysisModel' • chatgpt_debug/face_analysis_provider.dart:6:3 • undefined_class
+  error • Undefined name 'FaceAnalysisModel' • chatgpt_debug/face_analysis_provider.dart:6:31 • undefined_identifier
+  error • Undefined class 'FaceAnalysisModel' • chatgpt_debug/face_analysis_provider.dart:12:3 • undefined_class
+  error • The method 'FaceAnalysisModel' isn't defined for the type 'FaceAnalysisProvider' • chatgpt_debug/face_analysis_provider.dart:26:15 • undefined_method
+  error • Undefined name 'FaceAnalysisModel' • chatgpt_debug/face_analysis_provider.dart:45:15 • undefined_identifier
+  error • The argument type 'int' can't be assigned to the parameter type 'double'.  • lib/features/biometric/services/face_analysis_service.dart:84:24 • argument_type_not_assignable
+  error • The argument type 'int' can't be assigned to the parameter type 'double'.  • lib/features/biometric/services/face_analysis_service.dart:85:24 • argument_type_not_assignable
+  error • The argument type 'int' can't be assigned to the parameter type 'double'.  • lib/features/biometric/services/face_analysis_service.dart:86:23 • argument_type_not_assignable
+   info • Don't invoke 'print' in production code • lib/features/enterprise/services/photo_import_service.dart:46:7 • avoid_print
+   info • 'translate' is deprecated and shouldn't be used. Use translateByVector3, translateByVector4, or translateByDouble instead • lib/features/enterprise/widgets/ai_scan_workspace.dart:133:31 • deprecated_member_use
+   info • 'scale' is deprecated and shouldn't be used. Use scaleByVector3, scaleByVector4, or scaleByDouble instead • lib/features/enterprise/widgets/ai_scan_workspace.dart:139:31 • deprecated_member_use
+  error • The argument type 'int' can't be assigned to the parameter type 'String'.  • lib/features/enterprise/widgets/document_preset_bar.dart:29:34 • argument_type_not_assignable
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/enterprise/widgets/recent_images_panel.dart:18:28 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/features/enterprise/widgets/template_manager_panel.dart:18:28 • deprecated_member_use
+   info • Don't use 'BuildContext's across async gaps • lib/features/import/screens/import_screen.dart:42:5 • use_build_context_synchronously
+warning • The value of the local variable 'rows' isn't used • lib/features/print_studio/widgets/preview_canvas.dart:52:11 • unused_local_variable
 
+17 issues found. (ran in 1.1s)

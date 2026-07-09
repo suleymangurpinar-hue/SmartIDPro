@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/paper_size.dart';
 import '../providers/print_studio_provider.dart';
 import 'preview_canvas.dart';
 
@@ -18,92 +19,95 @@ class PrintStudioPanel extends StatelessWidget {
         border: Border.all(color: const Color.fromRGBO(255, 255, 255, .06)),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'PRINT STUDIO',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            _title('Baskı Boyutu'),
-
-            _dropdown<String>(
-              value: provider.paper,
-              items: const ['10x15', '13x18', '15x21', 'A4'],
-              onChanged: provider.setPaper,
-            ),
-
-            const SizedBox(height: 10),
-
-            _title('Fotoğraf Dizilimi'),
-
-            _dropdown<String>(
-              value: provider.layout,
-              items: const ['Auto', '4', '6', '8', '12', '16'],
-              labels: const {
-                'Auto': 'Otomatik',
-                '4': '4 Lü',
-                '6': '6 Lı',
-                '8': '8 Li',
-                '12': '12 Li',
-                '16': '16 Lı',
-              },
-              onChanged: provider.setLayout,
+            Row(
+              children: [
+                const Text(
+                  'BASKI STÜDYOSU',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    '${provider.photoCount} Adet',
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 10),
 
-            _title('Baskı Adedi'),
-
-            _dropdown<int>(
-              value: provider.quantity,
-              items: List.generate(20, (i) => i + 1),
-              onChanged: provider.setQuantity,
+            Row(
+              children: [
+                Expanded(
+                  child: _dropdown<String>(
+                    value: provider.paper,
+                    items: PaperSize.sizes.map((paper) => paper.name).toList(),
+                    onChanged: provider.setPaper,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1E293B),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Text(
+                      'Otomatik',
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ),
+                ),
+              ],
             ),
 
-            const SizedBox(height: 14),
+            const SizedBox(height: 8),
 
             const Text(
               'Baskı Önizlemesi',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                color: Colors.white70,
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+              ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 6),
 
-            SizedBox(
-              height: 230,
-              child: PreviewCanvas(count: provider.photoCount),
-            ),
-
-            const SizedBox(height: 12),
-
-            Center(
-              child: Text(
-                '${provider.photoCount} Adet • ${provider.paper}',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w600,
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF050B16),
+                  borderRadius: BorderRadius.circular(18),
                 ),
+                padding: const EdgeInsets.all(4),
+                child: const PreviewCanvas(),
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _title(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 4),
-      child: Text(text, style: const TextStyle(color: Colors.white70)),
     );
   }
 
@@ -114,18 +118,18 @@ class PrintStudioPanel extends StatelessWidget {
     Map<T, String>? labels,
   }) {
     return Container(
-      height: 44,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      height: 40,
+      padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(14),
       ),
       child: DropdownButton<T>(
         value: value,
         isExpanded: true,
+        underline: const SizedBox(),
         dropdownColor: const Color(0xFF1E293B),
-        underline: const SizedBox.shrink(),
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white, fontSize: 12),
         items: items
             .map(
               (e) => DropdownMenuItem<T>(

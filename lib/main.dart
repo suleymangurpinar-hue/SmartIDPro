@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'app.dart';
+import 'features/workspace/providers/workspace_provider.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+void main() {
   runApp(
-    const SmartIdProApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => WorkspaceProvider(),
+        ),
+      ],
+      child: const SmartIdProApp(),
+    ),
   );
 }

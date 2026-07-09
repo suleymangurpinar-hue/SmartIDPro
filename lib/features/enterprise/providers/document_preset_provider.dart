@@ -5,7 +5,8 @@ class DocumentPresetProvider extends ChangeNotifier {
   DocumentPreset _selected =
       DocumentPresets.turkeyBiometric;
 
-  DocumentPreset get selected => _selected;
+  DocumentPreset get selected =>
+      _selected;
 
   String get paperSize =>
       _selected.paper;
@@ -13,17 +14,55 @@ class DocumentPresetProvider extends ChangeNotifier {
   int get autoLayout =>
       _selected.layout;
 
-  double get targetHeadRatio =>
-      (_selected.headMinPercent +
-          _selected.headMaxPercent) /
-      200;
+  double get targetHeadRatio {
+    final name =
+        _selected.name.toLowerCase();
 
-  double get targetEyeRatio {
-    if (_selected.country == 'USA') {
-      return 0.40;
+    if (name.contains('usa')) {
+      return 0.76;
     }
 
-    return 0.38;
+    if (name.contains('nikah')) {
+      return 0.50;
+    }
+
+    if (name.contains('passport')) {
+      return 0.72;
+    }
+
+    if (name.contains('biyometrik')) {
+      return 0.66;
+    }
+
+    return 0.70;
+  }
+
+  double get targetEyeRatio {
+    final name =
+        _selected.name.toLowerCase();
+
+    if (name.contains('usa')) {
+      return 0.44;
+    }
+
+    if (name.contains('nikah')) {
+      return 0.50;
+    }
+
+    if (name.contains('passport')) {
+      return 0.45;
+    }
+
+    if (name.contains('biyometrik')) {
+      return 0.46;
+    }
+
+    return 0.46;
+  }
+
+  double get photoAspectRatio {
+    return _selected.widthMm /
+        _selected.heightMm;
   }
 
   void changePreset(

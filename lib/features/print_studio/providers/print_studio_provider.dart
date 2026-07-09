@@ -1,97 +1,67 @@
 import 'package:flutter/material.dart';
 
+import '../models/paper_size.dart';
+import '../models/photo_layout.dart';
+import '../services/auto_layout_service.dart';
+
 class PrintStudioProvider extends ChangeNotifier {
-  String paper = '10x15';
+  String _paper = '10x15';
+  String _layout = 'Auto';
 
-  String layout = '4';
+  double _photoWidthMm = 50;
+  double _photoHeightMm = 60;
 
-  int quantity = 1;
+  String get paper => _paper;
+  String get layout => _layout;
 
-  double photoWidthMm = 50;
-  double photoHeightMm = 60;
-
-  void applyPreset({
-    required String paperSize,
-    required int photoLayout,
-  }) {
-    paper = paperSize;
-    layout = photoLayout.toString();
-    notifyListeners();
-  }
-
-  void setPhotoSize(
-    double width,
-    double height,
-  ) {
-    photoWidthMm = width;
-    photoHeightMm = height;
-    notifyListeners();
-  }
+  double get photoWidthMm => _photoWidthMm;
+  double get photoHeightMm => _photoHeightMm;
+  PhotoLayout get photoLayout => AutoLayoutService.build(
+    paperWidthMm: paperWidthMm,
+    paperHeightMm: paperHeightMm,
+    widthMm: _photoWidthMm,
+    heightMm: _photoHeightMm,
+  );
 
   void setPaper(String value) {
-    paper = value;
+    _paper = PaperSize.byName(value).name;
     notifyListeners();
   }
 
   void setLayout(String value) {
-    layout = value;
+    _layout = 'Auto';
     notifyListeners();
   }
 
-  void setQuantity(int value) {
-    quantity = value;
+  void setPhotoSize(double width, double height) {
+    _photoWidthMm = width;
+    _photoHeightMm = height;
+    notifyListeners();
+  }
+
+  void applyPreset({required String paperSize, required String photoLayout}) {
+    _paper = PaperSize.byName(paperSize).name;
+    _layout = 'Auto';
     notifyListeners();
   }
 
   int get photoCount {
-    if (layout == 'Auto') {
-      return 8;
-    }
-
-    return int.tryParse(layout) ?? 8;
+    return photoLayout.count;
   }
 
   int get crossCount {
-    switch (photoCount) {
-      case 4:
-        return 2;
-
-      case 6:
-        return 3;
-
-      case 8:
-        return 4;
-
-      case 12:
-        return 4;
-
-      case 16:
-        return 4;
-
-      default:
-        return 4;
-    }
+    return photoLayout.columns;
   }
 
   int get rowCount {
-    switch (photoCount) {
-      case 4:
-        return 2;
+    return photoLayout.rows;
+  }
 
-      case 6:
-        return 2;
+  double get paperWidthMm {
+    return PaperSize.byName(_paper).widthMm;
+  }
 
-      case 8:
-        return 2;
-
-      case 12:
-        return 3;
-
-      case 16:
-        return 4;
-
-      default:
-        return 2;
-    }
+  double get paperHeightMm {
+    return PaperSize.byName(_paper).heightMm;
   }
 }

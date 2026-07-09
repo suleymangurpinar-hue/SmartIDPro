@@ -29,80 +29,42 @@ class SmartIdProApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => WorkspaceProvider()),
+        ChangeNotifierProvider(create: (_) => ProcessQueueProvider()),
+        ChangeNotifierProvider(create: (_) => ComplianceProvider()),
+        ChangeNotifierProvider(create: (_) => FaceAnalysisProvider()),
+        ChangeNotifierProvider(create: (_) => DocumentPresetProvider()),
+        ChangeNotifierProvider(create: (_) => JobHistoryProvider()),
         ChangeNotifierProvider(
-          create: (_) => WorkspaceProvider(),
+          create: (_) => EmbassyDatabaseProvider()..load(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ProcessQueueProvider(),
+          create: (_) => CustomerArchiveProvider()..load(),
         ),
+        ChangeNotifierProvider(create: (_) => RawStudioProvider()),
         ChangeNotifierProvider(
-          create: (_) => ComplianceProvider(),
+          create: (_) => BatchProcessingProvider()..load(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => FaceAnalysisProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => DocumentPresetProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => JobHistoryProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              EmbassyDatabaseProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              CustomerArchiveProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => RawStudioProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              BatchProcessingProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              ReportsProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              SettingsProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              AuthProvider()..load(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              PrintStudioProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => ReportsProvider()..load()),
+        ChangeNotifierProvider(create: (_) => SettingsProvider()..load()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()..load()),
+        ChangeNotifierProvider(create: (_) => PrintStudioProvider()),
       ],
       child: Consumer<SettingsProvider>(
         builder: (context, settings, _) {
           return MaterialApp(
-            debugShowCheckedModeBanner:
-                false,
+            debugShowCheckedModeBanner: false,
             title: 'Smart ID Pro',
             theme: AppTheme.darkTheme,
             locale: settings.locale,
-            supportedLocales: const [
-              Locale('tr'),
-              Locale('en'),
-            ],
-            localizationsDelegates:
-                const [
+            supportedLocales: const [Locale('tr'), Locale('en')],
+            localizationsDelegates: const [
               AppLocalizations.delegate,
-              GlobalMaterialLocalizations
-                  .delegate,
-              GlobalWidgetsLocalizations
-                  .delegate,
-              GlobalCupertinoLocalizations
-                  .delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
-            home:
-                const EnterpriseWorkspaceScreen(),
+            home: const EnterpriseWorkspaceScreen(),
           );
         },
       ),

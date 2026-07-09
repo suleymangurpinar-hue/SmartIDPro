@@ -42,36 +42,36 @@ class _BackgroundPanelState extends State<BackgroundPanel> {
 
             const SizedBox(height: 14),
 
-            Expanded(
-              child: GridView.builder(
-                itemCount: colors.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selected = index;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: colors[index],
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: selected == index
-                              ? const Color(0xFFD4A64A)
-                              : Colors.transparent,
-                          width: 3,
-                        ),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: colors.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selected = index;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: colors[index],
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: selected == index
+                            ? const Color(0xFFD4A64A)
+                            : Colors.transparent,
+                        width: 3,
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ],
         ),
